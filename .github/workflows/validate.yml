@@ -7,7 +7,7 @@ permissions:
   contents: read
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
@@ -24,7 +24,8 @@ jobs:
       - name: Build pinned Luau compiler
         run: |
           git clone --depth 1 --branch 0.656 https://github.com/luau-lang/luau.git "$RUNNER_TEMP/luau"
-          cmake -S "$RUNNER_TEMP/luau" -B "$RUNNER_TEMP/luau-build" -DCMAKE_BUILD_TYPE=Release -DLUAU_BUILD_TESTS=OFF
+          test "$(git -C "$RUNNER_TEMP/luau" rev-parse HEAD)" = c759cd5581f570980cf05186b0db58e65371c9fb
+          cmake -S "$RUNNER_TEMP/luau" -B "$RUNNER_TEMP/luau-build" -DCMAKE_BUILD_TYPE=Release -DLUAU_BUILD_TESTS=OFF -DCMAKE_POLICY_VERSION_MINIMUM=3.5
           cmake --build "$RUNNER_TEMP/luau-build" --target Luau.Compile.CLI -j 2
       - name: Compile all Luau sources
         shell: bash
