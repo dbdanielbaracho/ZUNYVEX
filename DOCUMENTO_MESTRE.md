@@ -21,3 +21,6 @@ Migrados os módulos BuildPersistence (6ad5c668) e BuildStore (44067b2c), preser
 
 ## v3.8 — migração do circuito (23/11/2026)
 Importado RaceCourse.server.luau do pacote v2.3, commit 38dc20caaa01f883eca44791f3bb8208ba15276f. Leitura remota confirmou quatro verificações textuais: Place ID, cinco checkpoints, pontes e preservação de circuito existente. Cinco dos onze scripts de produção migrados segundo inventário acumulado. Não equivale a compilação ou teste de jogabilidade. Próximo passo: migrar seis scripts restantes e histórico, configurar CI sem publicação. DataStore e publicação continuam desativados.
+
+## v3.9 — interface da corrida (23/11/2026)
+Importado RaceFeedback.client.luau do pacote v2.3, commit 3e63f97e31e60555e69e9ca53b3ea8a339f8c4c6. Leitura remota confirmou igualdade integral com o conteúdo enviado. Interface apresenta largada, progresso, chegada, tempo esgotado e animação de vitória com 12 estrelas. Seis dos onze scripts de produção migrados segundo inventário acumulado; cinco caminhos restantes retornaram 404 antes da migração. Controlador servidor ainda pendente, portanto interface não operacional isoladamente. Sem compilação, build ou teste de jogabilidade nesta rodada. Próximo passo: importar controlador e scripts de construção/HUD, histórico e CI sem publicação. DataStore permanece desativado.
