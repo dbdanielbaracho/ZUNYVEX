@@ -45,3 +45,6 @@ Confirmado 404 antes da criação de Building.client.luau. Reconstruído cliente
 
 ## v3.16 — reconstrução do servidor central (24/11/2026)
 Criado Zunyvex.server.luau, commit 10ffce3b5cbb2c37b46c7ec4b120e0c41d6a2500; leitura remota igual ao código enviado. Inventário histórico 11/11 (8 importados, 3 reconstruídos). Implementados eventos Notice/StatsUpdate, pontuação de sessão, 18 cristais com respawn, portal e sete checkpoints sequenciais, geometria inicial e retorno ao início. Sem DataStore ou publicação. Preserva mundo nomeado existente; integração com mundo autoral, geometria, segurança de recompensas, compilação e jogabilidade ainda exigem validação. Próximo passo: executar CI, testes Luau e revisar integração multiplayer; não publicar sem validação.
+
+## v3.17 — validação por pull request (24/11/2026)
+Aberto PR #1 (validation/ci-v316), commit 11d6dca66c6f7c6e0ddcd30de8a01172db231bc0: exige ativação do portal para recompensas do Desafio das Nuvens e limpa estado ao morrer ou concluir. Leitura remota idêntica; alteração ainda não integrada à main. PR permite consultar CI por evento pull_request, contornando limitação de observabilidade dos eventos push. Compilação, build e jogabilidade ainda não comprovados. Próximo passo: consultar jobs do PR, corrigir falhas e integrar após validação. DataStore e publicação desativados.
