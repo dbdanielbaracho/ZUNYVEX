@@ -57,3 +57,6 @@ Workflow atualizado em branch validation/luau-compile-v319, commit 5eff5b8f88927
 
 ## v3.20 — correção de compatibilidade do compilador (24/11/2026)
 CI do PR #2, execução 45439297516, job 138605618657: entrypoints aprovados; configuração CMake falhou antes de compilar Luau, devido à remoção de compatibilidade com versões anteriores a 3.5 no runner Ubuntu 26.04. Corrigido workflow no commit e5adf1060d2c1e5c78d508ed94d00f4f434302d1: runner ubuntu-24.04, CMAKE_POLICY_VERSION_MINIMUM=3.5 e verificação do SHA da fonte Luau 0.656 (c759cd5581f570980cf05186b0db58e65371c9fb). Gate de compilação preservado; novo CI pendente. Não houve teste de jogabilidade nem publicação. Próximo passo: validar novo CI, corrigir falhas remanescentes e executar testes de módulos puros. DataStore e publicação desativados.
+
+## v3.21 — compilação aprovada e integrada (24/11/2026)
+CI do PR #2, execução 45450614484, confirmado como completed/success para o head 5eba0fd5bc7884d8306882d483226d703b7a7de5. PR #2 integrado à main com merge 1bba4d1c077a7d71fd3dbfa0189f133ef24d9da4. Gate Luau preservado. Próxima prioridade: executar testes de módulos puros no CI, além da compilação, e validar jogabilidade e multiplayer em ambiente Roblox autorizado. Não houve publicação nem ativação do DataStore.
