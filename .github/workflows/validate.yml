@@ -26,7 +26,7 @@ jobs:
           git clone --depth 1 --branch 0.656 https://github.com/luau-lang/luau.git "$RUNNER_TEMP/luau"
           test "$(git -C "$RUNNER_TEMP/luau" rev-parse HEAD)" = c759cd5581f570980cf05186b0db58e65371c9fb
           cmake -S "$RUNNER_TEMP/luau" -B "$RUNNER_TEMP/luau-build" -DCMAKE_BUILD_TYPE=Release -DLUAU_BUILD_TESTS=OFF -DCMAKE_POLICY_VERSION_MINIMUM=3.5
-          cmake --build "$RUNNER_TEMP/luau-build" --target Luau.Compile.CLI -j 2
+          cmake --build "$RUNNER_TEMP/luau-build" --target Luau.Compile.CLI Luau.Repl.CLI -j 2
       - name: Compile all Luau sources
         shell: bash
         run: |
@@ -39,6 +39,9 @@ jobs:
           done < <(find src tests -type f -name '*.luau' -print0)
           test "$count" -ge 11
           echo "Compiled $count Luau files"
+      - name: Execute checkpoint race functional tests
+        run: |
+          "$RUNNER_TEMP/luau-build/luau" tests/CheckpointRace.spec.luau
       - name: Install Rojo
         run: cargo install rojo --version 7.4.4 --locked
       - name: Build private place artifact
