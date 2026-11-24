@@ -11,6 +11,16 @@ jobs:
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
+      - name: Require complete production entrypoints
+        run: |
+          missing=0
+          for file in src/StarterPlayer/StarterPlayerScripts/Building.client.luau src/ServerScriptService/Building.server.luau src/ServerScriptService/Zunyvex.server.luau; do
+            if ! test -s "$file"; then
+              echo "::error file=$file::Missing or empty production entrypoint"
+              missing=1
+            fi
+          done
+          exit "$missing"
       - name: Install Rojo
         run: cargo install rojo --version 7.4.4 --locked
       - name: Build private place artifact
