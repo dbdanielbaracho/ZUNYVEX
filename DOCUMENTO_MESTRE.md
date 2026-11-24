@@ -54,3 +54,6 @@ CI do PR #1, execução 45405338126, job 138484384017: sucesso em todas as etapa
 
 ## v3.19 — gate de compilação Luau (24/11/2026)
 Workflow atualizado em branch validation/luau-compile-v319, commit 5eff5b8f88927ab017126d71cc664b43951b22f2. Compilador oficial Luau tag 0.656 construído via CMake no CI; etapa compila arquivos .luau de src e tests antes do Rojo e falha se houver erro. Execução ainda pendente de comprovação; não equivale a testes funcionais. DataStore e publicação permanecem desativados. Próximo passo: validar CI, corrigir erros e executar testes funcionais de módulos puros.
+
+## v3.20 — correção de compatibilidade do compilador (24/11/2026)
+CI do PR #2, execução 45439297516, job 138605618657: entrypoints aprovados; configuração CMake falhou antes de compilar Luau, devido à remoção de compatibilidade com versões anteriores a 3.5 no runner Ubuntu 26.04. Corrigido workflow no commit e5adf1060d2c1e5c78d508ed94d00f4f434302d1: runner ubuntu-24.04, CMAKE_POLICY_VERSION_MINIMUM=3.5 e verificação do SHA da fonte Luau 0.656 (c759cd5581f570980cf05186b0db58e65371c9fb). Gate de compilação preservado; novo CI pendente. Não houve teste de jogabilidade nem publicação. Próximo passo: validar novo CI, corrigir falhas remanescentes e executar testes de módulos puros. DataStore e publicação desativados.
