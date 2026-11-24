@@ -60,3 +60,6 @@ CI do PR #2, execução 45439297516, job 138605618657: entrypoints aprovados; co
 
 ## v3.21 — compilação aprovada e integrada (24/11/2026)
 CI do PR #2, execução 45450614484, confirmado como completed/success para o head 5eba0fd5bc7884d8306882d483226d703b7a7de5. PR #2 integrado à main com merge 1bba4d1c077a7d71fd3dbfa0189f133ef24d9da4. Gate Luau preservado. Próxima prioridade: executar testes de módulos puros no CI, além da compilação, e validar jogabilidade e multiplayer em ambiente Roblox autorizado. Não houve publicação nem ativação do DataStore.
+
+## v3.22 — gate funcional da corrida (24/11/2026)
+Em branch validation/race-functional-v322, especificação CheckpointRace adaptada ao CLI Luau e ampliada com isolamento, tempo inválido, jogador inexistente, entrada inválida e limite temporal exato (0777a8c6c02bbd501a52711f6537aa5535a018cd). Workflow constrói também Luau.Repl.CLI e exige execução das assertions antes do Rojo (ce61adcb8081f7f2df4375bb050f9db5cf58fc2e). Alterações registradas, execução ainda pendente; não equivale a teste multiplayer Roblox. DataStore e publicação permanecem desativados. Próximo passo: verificar CI, corrigir falhas e ampliar testes de construção.
