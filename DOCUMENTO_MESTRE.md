@@ -51,3 +51,6 @@ Aberto PR #1 (validation/ci-v316), commit 11d6dca66c6f7c6e0ddcd30de8a01172db231b
 
 ## v3.18 — primeiro build Rojo confirmado (24/11/2026)
 CI do PR #1, execução 45405338126, job 138484384017: sucesso em todas as etapas, incluindo integridade dos entrypoints, instalação Rojo, build RBXLX e upload. Artefato ZUNYVEX-private-build ID 14924799444, ZIP 9422 bytes, digest sha256:d795711526002c11f5652eea1e902ebbf32ea82e63519d3424d5ceb250a20676. PR integrado à main, merge d8b2546b3bdd886b41fd13c46efba48da80409e0. Build de empacotamento comprovado; não equivale a compilação Luau nem execução Roblox. Próximo passo: adicionar verificação sintática Luau e testes executáveis, depois validar multiplayer. DataStore e publicação permanecem desativados.
+
+## v3.19 — gate de compilação Luau (24/11/2026)
+Workflow atualizado em branch validation/luau-compile-v319, commit 5eff5b8f88927ab017126d71cc664b43951b22f2. Compilador oficial Luau tag 0.656 construído via CMake no CI; etapa compila arquivos .luau de src e tests antes do Rojo e falha se houver erro. Execução ainda pendente de comprovação; não equivale a testes funcionais. DataStore e publicação permanecem desativados. Próximo passo: validar CI, corrigir erros e executar testes funcionais de módulos puros.
