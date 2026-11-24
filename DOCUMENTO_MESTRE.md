@@ -30,3 +30,6 @@ Integrado RaceCheckpointController.server.luau, commit 973b0b975a288b2640287774d
 
 ## v3.11 — HUD principal (24/11/2026)
 Importado HUD.client.luau do pacote v2.3, commit 62ef26153ae835db5a2f01dd668dd139a514f4b3. Leitura remota confirmou igualdade integral com conteúdo enviado. HUD apresenta estrelas, cristais, dicas e notificações temporárias. Inventário acumulado: 8/11 scripts de produção; faltam Building cliente, Building servidor e Zunyvex servidor. Dependência dos eventos Notice e StatsUpdate no servidor ainda não validada em execução. Sem compilação, build ou teste real nesta rodada. Próximo passo: concluir importação, histórico e CI sem publicação automática. DataStore permanece desativado.
+
+## v3.12 — CI de build (24/11/2026)
+Criado workflow .github/workflows/validate.yml no commit 124e6901c9f8e5346a809493cb28d1b2df449b61, com Rojo 7.4.4 via Cargo, geração de RBXLX, verificação de arquivo não vazio e armazenamento de artefato. Sem publicação automática, permissões somente leitura. Leitura remota do workflow confirmada. Execução do CI e compilação Luau ainda não comprovadas; build Rojo não equivale a teste Luau ou jogabilidade. Inventário histórico 8/11 scripts; recuperação dos três restantes pendente. DataStore permanece desativado. Próximo passo: verificar resultado do CI, corrigir falhas e recuperar ou reconstruir módulos faltantes com testes.
