@@ -48,3 +48,6 @@ Criado Zunyvex.server.luau, commit 10ffce3b5cbb2c37b46c7ec4b120e0c41d6a2500; lei
 
 ## v3.17 — validação por pull request (24/11/2026)
 Aberto PR #1 (validation/ci-v316), commit 11d6dca66c6f7c6e0ddcd30de8a01172db231bc0: exige ativação do portal para recompensas do Desafio das Nuvens e limpa estado ao morrer ou concluir. Leitura remota idêntica; alteração ainda não integrada à main. PR permite consultar CI por evento pull_request, contornando limitação de observabilidade dos eventos push. Compilação, build e jogabilidade ainda não comprovados. Próximo passo: consultar jobs do PR, corrigir falhas e integrar após validação. DataStore e publicação desativados.
+
+## v3.18 — primeiro build Rojo confirmado (24/11/2026)
+CI do PR #1, execução 45405338126, job 138484384017: sucesso em todas as etapas, incluindo integridade dos entrypoints, instalação Rojo, build RBXLX e upload. Artefato ZUNYVEX-private-build ID 14924799444, ZIP 9422 bytes, digest sha256:d795711526002c11f5652eea1e902ebbf32ea82e63519d3424d5ceb250a20676. PR integrado à main, merge d8b2546b3bdd886b41fd13c46efba48da80409e0. Build de empacotamento comprovado; não equivale a compilação Luau nem execução Roblox. Próximo passo: adicionar verificação sintática Luau e testes executáveis, depois validar multiplayer. DataStore e publicação permanecem desativados.
