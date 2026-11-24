@@ -63,3 +63,6 @@ CI do PR #2, execução 45450614484, confirmado como completed/success para o he
 
 ## v3.22 — gate funcional da corrida (24/11/2026)
 Em branch validation/race-functional-v322, especificação CheckpointRace adaptada ao CLI Luau e ampliada com isolamento, tempo inválido, jogador inexistente, entrada inválida e limite temporal exato (0777a8c6c02bbd501a52711f6537aa5535a018cd). Workflow constrói também Luau.Repl.CLI e exige execução das assertions antes do Rojo (ce61adcb8081f7f2df4375bb050f9db5cf58fc2e). Alterações registradas, execução ainda pendente; não equivale a teste multiplayer Roblox. DataStore e publicação permanecem desativados. Próximo passo: verificar CI, corrigir falhas e ampliar testes de construção.
+
+## v3.23 — testes funcionais da corrida aprovados (24/11/2026)
+CI do PR #3, head e7351f59ceb93ce0abe9a1a1802616e56b5fba63, execução 45493001833, job 138795990621: compilação Luau e execução CLI de tests/CheckpointRace.spec.luau aprovadas (log: CheckpointRace spec passed). Rojo 7.4.4 gerou RBXLX e upload do artefato 14968091174 (9422 bytes) confirmado. PR #3 integrado à main: 3d0fac0a0452df648522b0fdac4786455d1e24c6. Testes de módulo puro não comprovam jogabilidade nem multiplayer real. Próximo passo: testes de construção livre e validação de integração Roblox. Sem publicação ou ativação de DataStore nesta rodada.
