@@ -106,3 +106,24 @@ for i = 1, Config.ObbyCheckpoints do
         end
     end)
 end
+
+-- Optional exploration island in the generated world only.
+-- A continuous bridge makes the island accessible without teleporting.
+part("RainbowBridge", Vector3.new(122,-3,0), Vector3.new(30,2,12), Color3.fromRGB(240,180,100), true)
+part("SunsetIsland", Vector3.new(158,-3,0), Vector3.new(44,2,48), Color3.fromRGB(244,188,119), true)
+local discovered: {[Player]: boolean} = {}
+Players.PlayerRemoving:Connect(function(p) discovered[p] = nil end)
+for i = 1, 4 do
+    local x = 145 + (i-1)*8
+    local arch = part("SunsetArch_"..i, Vector3.new(x,2,-12), Vector3.new(2,8,2), Color3.fromRGB(255,130,100), true)
+    arch.Material = Enum.Material.SmoothPlastic
+end
+local beacon = part("SunsetDiscovery", Vector3.new(169,2,10), Vector3.new(6,6,6), Color3.fromRGB(255,220,90), false)
+beacon.Material = Enum.Material.Neon
+beacon.Shape = Enum.PartType.Ball
+beacon.Touched:Connect(function(hit)
+    local p = playerFromHit(hit)
+    if not p or not state[p] or discovered[p] then return end
+    discovered[p] = true
+    reward(p, 25, 0, "Ilha do Pôr do Sol descoberta!")
+end)
