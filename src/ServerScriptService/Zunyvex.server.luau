@@ -3,6 +3,7 @@
 local Players = game:GetService("Players")
 local RS = game:GetService("ReplicatedStorage")
 local Config = require(RS:WaitForChild("GameConfig"))
+local Challenge = require(RS:WaitForChild("CloudChallenge"))
 if game.PlaceId ~= 112566849572143 and not game:GetService("RunService"):IsStudio() then return end
 local function folder(parent: Instance, name: string): Folder
     local existing = parent:FindFirstChild(name)
@@ -22,7 +23,7 @@ local function init(p: Player)
     if state[p] then return end
     state[p] = {stars=0, crystals=0, checkpoint=0, challengeActive=false}
     p.CharacterRemoving:Connect(function()
-        local s = state[p]; if s then s.checkpoint = 0; s.challengeActive = false end
+        local s = state[p]; if s then Challenge.reset(s) end
     end)
 end
 Players.PlayerAdded:Connect(init)
@@ -83,7 +84,7 @@ portal.Touched:Connect(function(hit)
     local now = os.clock()
     if portalAt[p] and now - portalAt[p] < 2 then return end
     portalAt[p] = now
-    local s = state[p]; if s then s.checkpoint = 0; s.challengeActive = true end
+    local s = state[p]; if s then Challenge.start(s) end
     if p.Character then p.Character:PivotTo(CFrame.new(Config.PortalDestination)) end
     notice:FireClient(p, "Desafio das Nuvens!")
 end)
@@ -94,11 +95,11 @@ for i = 1, Config.ObbyCheckpoints do
     gate.Transparency = 0.6
     gate.Touched:Connect(function(hit)
         local p = playerFromHit(hit); if not p then return end
-        local s = state[p]; if not s or not s.challengeActive or s.checkpoint ~= i-1 then return end
-        s.checkpoint = i
-        if i == Config.ObbyCheckpoints then
+        local s = state[p]; if not s then return end
+        local result = Challenge.advance(s, i, Config.ObbyCheckpoints)
+        if result == "ignored" then return end
+        if result == "finished" then
             reward(p, Config.ObbyFinishPoints, 0, "Desafio concluído!")
-            s.checkpoint = 0; s.challengeActive = false
             if p.Character then p.Character:PivotTo(CFrame.new(0,5,0)) end
         else
             notice:FireClient(p, string.format("Nuvem %d/%d", i, Config.ObbyCheckpoints))
