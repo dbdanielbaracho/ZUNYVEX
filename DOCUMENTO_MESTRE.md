@@ -76,3 +76,6 @@ PR #4 integrado à main, merge ae2e9b6d8eafe9abc5224aa2a19e4cf5c866797d. CI 4551
 
 ## v3.26 — propriedade e ocupação (25/11/2026)
 Branch validation/build-ownership-v326: módulo BuildLedger (ef7ee913), testes de isolamento, capacidade, remoção e limpeza (af66fc49), integração ao servidor de produção (abeaf4a6). Gate funcional acrescentado ao CI. Commits remotos confirmados; execução CI e integração à main pendentes. Colisões físicas e multiplayer real ainda exigem homologação Roblox. Sem publicação ou ativação do DataStore. Próximo passo: verificar CI, corrigir falhas e integrar; avançar exploração e minijogos.
+
+## v3.27 — propriedade e ocupação validadas (25/11/2026)
+CI do PR #5, head fae2f0223d210024618e6f1d4ab69abaac61a031, execução 45578355179: 14 etapas aprovadas, incluindo compilação Luau, testes de corrida, codec e propriedade de construção, build Rojo e upload. PR #5 integrado à main, merge 41b442466e1f4dc420698630f4f391a443343cde. Testes de módulo puro não comprovam colisões físicas ou multiplayer real. Próxima frente: exploração e aventuras, com testes funcionais independentes. Sem publicação ou ativação do DataStore nesta rodada. Estimativa comercial de 30% permanece não auditada.
