@@ -42,6 +42,9 @@ jobs:
       - name: Execute checkpoint race functional tests
         run: |
           "$RUNNER_TEMP/luau-build/luau" tests/CheckpointRace.spec.luau
+      - name: Execute creative build codec tests
+        run: |
+          "$RUNNER_TEMP/luau-build/luau" tests/BuildPersistenceCLI.spec.luau
       - name: Install Rojo
         run: cargo install rojo --version 7.4.4 --locked
       - name: Build private place artifact
