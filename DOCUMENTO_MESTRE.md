@@ -69,3 +69,7 @@ CI do PR #3, head e7351f59ceb93ce0abe9a1a1802616e56b5fba63, execução 454930018
 
 ## v3.24 — testes do codec de construção (24/11/2026)
 Adicionada especificação CLI do módulo de produção BuildPersistence (1c82a86d870d3ca4992a796eb9557f6bb28aae2c), cobrindo round-trip, grade, limites, cores, duplicatas, NaN/infinito, capacidade 80/81 e payloads inválidos. Gate obrigatório no CI (5f221264e58c3a86c4d397c1de5c2c1872197351). Execução pendente; não comprova propriedade, colisões ou multiplayer Roblox. Próximo passo: validar CI e extrair regras de propriedade/ocupação para testes funcionais do servidor. DataStore e publicação desativados.
+
+
+## v3.25 — validação do codec integrada (24/11/2026)
+PR #4 integrado à main, merge ae2e9b6d8eafe9abc5224aa2a19e4cf5c866797d. CI 45519528604, job 138887570642, confirmou sucesso nas etapas de compilação Luau, testes da corrida, testes do codec de construção, build Rojo e upload. Próxima entrega: extrair regras de propriedade e ocupação do servidor de construção e testar isolamento, remoção e limites. Sem homologação Roblox, publicação ou ativação de DataStore nesta rodada. Estimativa comercial anterior de 30% permanece não auditada.
