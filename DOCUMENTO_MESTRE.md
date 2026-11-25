@@ -88,3 +88,6 @@ PR #6 integrado à main, merge 9e791a26b31b989b6fd26da2e6cf40491e2e1176. CI 4561
 
 ## v3.30 — Ilha do Pôr do Sol (25/11/2026)
 Branch feature/discovery-island-v330: nova ilha, ponte e monumento com 25 estrelas (2be5f51). Módulo DiscoveryLedger (4086ed93) e testes CLI (44d6d202) isolam descobertas por UserId e impedem recompensa repetida mesmo após reconexão ao mesmo servidor. Estado em memória, sem DataStore. CI ampliado; execução e integração pendentes. Geometria e jogabilidade real ainda não homologadas. Sem publicação.
+
+## v3.31 — Ilha do Pôr do Sol integrada (25/11/2026)
+PR #7 integrado à main, merge d12d3396bb41d30fc1e9d50101c91bcf0a15acc7. CI 45667361706, job 139393024246: 16 etapas aprovadas, incluindo compilação Luau, cinco suítes funcionais, build Rojo e upload. Recompensas e isolamento por usuário validados em CLI; geometria, acessibilidade física e multiplayer real ainda não homologados. Sem publicação ou DataStore. Próxima entrega: ampliar minijogos e preparar homologação Studio. Estimativa comercial anterior de 30% não auditada.
