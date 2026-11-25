@@ -51,6 +51,9 @@ jobs:
       - name: Execute cloud adventure tests
         run: |
           "$RUNNER_TEMP/luau-build/luau" tests/CloudChallenge.spec.luau
+      - name: Execute discovery reward tests
+        run: |
+          "$RUNNER_TEMP/luau-build/luau" tests/DiscoveryLedger.spec.luau
       - name: Install Rojo
         run: cargo install rojo --version 7.4.4 --locked
       - name: Build private place artifact

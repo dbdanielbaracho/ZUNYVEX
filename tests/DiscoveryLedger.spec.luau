@@ -1,0 +1,10 @@
+local L = require("../src/ReplicatedStorage/DiscoveryLedger")
+local state = {}
+assert(not L.claim(state, 1, ""))
+assert(L.claim(state, 1, "sunset"))
+assert(not L.claim(state, 1, "sunset"))
+assert(L.claim(state, 2, "sunset"))
+assert(L.claim(state, 1, "forest"))
+assert(not L.claim(state, 1, "sunset"))
+assert(L.claim({}, 1, "sunset"))
+print("DiscoveryLedger spec passed")
