@@ -1,0 +1,20 @@
+local C = require("../src/ReplicatedStorage/CloudChallenge")
+local a = {checkpoint=0, challengeActive=false}
+local b = {checkpoint=0, challengeActive=false}
+assert(C.advance(a,1,7) == "ignored")
+C.start(a)
+assert(C.advance(a,2,7) == "ignored")
+assert(C.advance(a,1,7) == "advanced")
+assert(C.advance(a,1,7) == "ignored")
+assert(b.checkpoint == 0 and not b.challengeActive)
+C.start(b)
+assert(C.advance(b,1,7) == "advanced")
+for i=2,6 do assert(C.advance(a,i,7) == "advanced") end
+assert(C.advance(a,7,7) == "finished")
+assert(C.advance(a,7,7) == "ignored")
+assert(b.checkpoint == 1 and b.challengeActive)
+C.reset(b)
+assert(C.advance(b,2,7) == "ignored")
+C.start(a)
+assert(C.advance(a,1,7) == "advanced")
+print("CloudChallenge spec passed")
