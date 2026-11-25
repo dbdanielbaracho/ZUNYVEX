@@ -66,3 +66,6 @@ Em branch validation/race-functional-v322, especificação CheckpointRace adapta
 
 ## v3.23 — testes funcionais da corrida aprovados (24/11/2026)
 CI do PR #3, head e7351f59ceb93ce0abe9a1a1802616e56b5fba63, execução 45493001833, job 138795990621: compilação Luau e execução CLI de tests/CheckpointRace.spec.luau aprovadas (log: CheckpointRace spec passed). Rojo 7.4.4 gerou RBXLX e upload do artefato 14968091174 (9422 bytes) confirmado. PR #3 integrado à main: 3d0fac0a0452df648522b0fdac4786455d1e24c6. Testes de módulo puro não comprovam jogabilidade nem multiplayer real. Próximo passo: testes de construção livre e validação de integração Roblox. Sem publicação ou ativação de DataStore nesta rodada.
+
+## v3.24 — testes do codec de construção (24/11/2026)
+Adicionada especificação CLI do módulo de produção BuildPersistence (1c82a86d870d3ca4992a796eb9557f6bb28aae2c), cobrindo round-trip, grade, limites, cores, duplicatas, NaN/infinito, capacidade 80/81 e payloads inválidos. Gate obrigatório no CI (5f221264e58c3a86c4d397c1de5c2c1872197351). Execução pendente; não comprova propriedade, colisões ou multiplayer Roblox. Próximo passo: validar CI e extrair regras de propriedade/ocupação para testes funcionais do servidor. DataStore e publicação desativados.
