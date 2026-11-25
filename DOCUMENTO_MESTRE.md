@@ -94,3 +94,6 @@ PR #7 integrado à main, merge d12d3396bb41d30fc1e9d50101c91bcf0a15acc7. CI 4566
 
 ## v3.32 — Trilha das Cores (25/11/2026)
 Branch feature/color-trail-v332: novo minijogo de quatro portais numerados, 30 segundos, recompensa de 15 estrelas, isolamento de tentativas e limpeza ao morrer/sair. Módulo 203fe31b, integração 3d76155e, testes CLI 6fb32ba2. CI ampliado; execução e integração pendentes. Não comprova física ou multiplayer real. Sem publicação ou DataStore.
+
+## v3.33 — Trilha das Cores integrada (25/11/2026)
+PR #8 integrado à main, merge c50e069500cdc165a4f34757c839f9ebeafe3756. CI 45687584675, job 139464157133: 17 etapas aprovadas, incluindo compilação Luau, seis suítes funcionais, build Rojo e upload. Sequência, prazo, isolamento e conclusão única por tentativa validados em CLI. Homologação física e multiplayer real pendentes. Próxima frente: competição por melhores tempos e preparação de testes Studio. Sem publicação ou ativação de DataStore. Estimativa comercial anterior de 30% não auditada.
