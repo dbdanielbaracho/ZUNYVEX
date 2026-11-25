@@ -82,3 +82,6 @@ CI do PR #5, head fae2f0223d210024618e6f1d4ab69abaac61a031, execução 455783551
 
 ## v3.28 — regras do Desafio das Nuvens (25/11/2026)
 Branch feature/cloud-challenge-v328: módulo CloudChallenge (7bf7ad0c), integrado ao servidor (fbd635da), testes CLI de sequência, repetição, conclusão, reset e isolamento (49e8a15c). Gate CI acrescentado. Commits confirmados; execução CI e integração à main pendentes. Não constitui nova aventura nem homologação Roblox. Próximo passo: validar CI e ampliar conteúdo explorável. Sem publicação ou DataStore.
+
+## v3.29 — Desafio das Nuvens validado (25/11/2026)
+PR #6 integrado à main, merge 9e791a26b31b989b6fd26da2e6cf40491e2e1176. CI 45615025103, job 139208081109: 15 etapas com sucesso, inclusive compilação, quatro suítes funcionais, build Rojo e upload. Bloqueio de integração resolvido. A homologação no motor Roblox permanece pendente; testes CLI não substituem testes cliente-servidor. Próxima entrega: conteúdo explorável novo e preparação de testes Studio. Não houve publicação ou alteração de DataStore. Estimativa comercial anterior de 30% não auditada.
