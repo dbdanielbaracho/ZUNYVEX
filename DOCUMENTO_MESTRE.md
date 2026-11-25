@@ -91,3 +91,6 @@ Branch feature/discovery-island-v330: nova ilha, ponte e monumento com 25 estrel
 
 ## v3.31 — Ilha do Pôr do Sol integrada (25/11/2026)
 PR #7 integrado à main, merge d12d3396bb41d30fc1e9d50101c91bcf0a15acc7. CI 45667361706, job 139393024246: 16 etapas aprovadas, incluindo compilação Luau, cinco suítes funcionais, build Rojo e upload. Recompensas e isolamento por usuário validados em CLI; geometria, acessibilidade física e multiplayer real ainda não homologados. Sem publicação ou DataStore. Próxima entrega: ampliar minijogos e preparar homologação Studio. Estimativa comercial anterior de 30% não auditada.
+
+## v3.32 — Trilha das Cores (25/11/2026)
+Branch feature/color-trail-v332: novo minijogo de quatro portais numerados, 30 segundos, recompensa de 15 estrelas, isolamento de tentativas e limpeza ao morrer/sair. Módulo 203fe31b, integração 3d76155e, testes CLI 6fb32ba2. CI ampliado; execução e integração pendentes. Não comprova física ou multiplayer real. Sem publicação ou DataStore.

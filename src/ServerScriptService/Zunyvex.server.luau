@@ -127,3 +127,53 @@ beacon.Touched:Connect(function(hit)
     if not DiscoveryLedger.claim(discovered, p.UserId, "sunset") then return end
     reward(p, 25, 0, "Ilha do Pôr do Sol descoberta!")
 end)
+
+-- Color Trail: independent timed challenge on the generated island.
+local Trail = require(RS:WaitForChild("ColorTrail"))
+local attempts: {[Player]: Trail.State} = {}
+local startAt: {[Player]: number} = {}
+Players.PlayerRemoving:Connect(function(p) attempts[p]=nil; startAt[p]=nil end)
+local function bindTrailPlayer(p: Player)
+    p.CharacterRemoving:Connect(function() attempts[p]=nil end)
+end
+Players.PlayerAdded:Connect(bindTrailPlayer)
+for _, p in Players:GetPlayers() do bindTrailPlayer(p) end
+local startPad = part("ColorTrailStart", Vector3.new(-60,1,55), Vector3.new(6,4,6), Color3.fromRGB(255,255,255), false)
+local function label(p: Part, message: string)
+    local gui = Instance.new("BillboardGui")
+    gui.Size=UDim2.fromOffset(180,45); gui.StudsOffset=Vector3.new(0,4,0)
+    gui.MaxDistance=65; gui.Parent=p
+    local t=Instance.new("TextLabel"); t.Size=UDim2.fromScale(1,1)
+    t.BackgroundTransparency=0.25; t.TextScaled=true; t.Text=message; t.Parent=gui
+end
+label(startPad,"Trilha das Cores: 30s")
+startPad.Touched:Connect(function(hit)
+    local p=playerFromHit(hit); if not p or not state[p] then return end
+    local now=os.clock()
+    if startAt[p] and now-startAt[p]<2 then return end
+    local old=attempts[p]
+    if old and old.active and now-old.started<=30 then return end
+    startAt[p]=now
+    local attempt=Trail.start(now); attempts[p]=attempt
+    notice:FireClient(p,"Passe pelos 4 portais em ordem!")
+    task.delay(30.1,function()
+        if attempts[p]==attempt and attempt.active then
+            attempt.active=false
+            if state[p] then notice:FireClient(p,"Tempo esgotado. Tente novamente!") end
+        end
+    end)
+end)
+local colors={Color3.fromRGB(255,90,90),Color3.fromRGB(255,220,80),Color3.fromRGB(80,220,130),Color3.fromRGB(80,150,255)}
+for i=1,4 do
+    local gate=part("ColorTrailGate_"..i,Vector3.new(-60+i*15,2,55),Vector3.new(5,6,5),colors[i],false)
+    gate.Material=Enum.Material.Neon; gate.Transparency=0.35
+    label(gate,tostring(i))
+    gate.Touched:Connect(function(hit)
+        local p=playerFromHit(hit); if not p or not state[p] then return end
+        local attempt=attempts[p]; if not attempt then return end
+        local result=Trail.touch(attempt,i,os.clock())
+        if result=="finished" then reward(p,15,0,"Trilha das Cores concluída!")
+        elseif result=="advanced" then notice:FireClient(p,string.format("Portal %d/4",i))
+        elseif result=="expired" then notice:FireClient(p,"Tempo esgotado. Tente novamente!") end
+    end)
+end
