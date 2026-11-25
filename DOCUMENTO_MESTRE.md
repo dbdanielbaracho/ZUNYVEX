@@ -73,3 +73,6 @@ Adicionada especificação CLI do módulo de produção BuildPersistence (1c82a8
 
 ## v3.25 — validação do codec integrada (24/11/2026)
 PR #4 integrado à main, merge ae2e9b6d8eafe9abc5224aa2a19e4cf5c866797d. CI 45519528604, job 138887570642, confirmou sucesso nas etapas de compilação Luau, testes da corrida, testes do codec de construção, build Rojo e upload. Próxima entrega: extrair regras de propriedade e ocupação do servidor de construção e testar isolamento, remoção e limites. Sem homologação Roblox, publicação ou ativação de DataStore nesta rodada. Estimativa comercial anterior de 30% permanece não auditada.
+
+## v3.26 — propriedade e ocupação (25/11/2026)
+Branch validation/build-ownership-v326: módulo BuildLedger (ef7ee913), testes de isolamento, capacidade, remoção e limpeza (af66fc49), integração ao servidor de produção (abeaf4a6). Gate funcional acrescentado ao CI. Commits remotos confirmados; execução CI e integração à main pendentes. Colisões físicas e multiplayer real ainda exigem homologação Roblox. Sem publicação ou ativação do DataStore. Próximo passo: verificar CI, corrigir falhas e integrar; avançar exploração e minijogos.

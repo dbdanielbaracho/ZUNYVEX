@@ -20,7 +20,7 @@ local result = remote("BuildResult")
 local builds = folder(workspace, "ZunyvexBuilds")
 local colors = {Sky = Color3.fromRGB(80,180,255), Pink = Color3.fromRGB(255,120,190), Gold = Color3.fromRGB(255,210,70), Mint = Color3.fromRGB(100,230,170)}
 local occupied: {[string]: Part} = {}
-local counts: {[Player]: number} = {}
+local ledger = require(script.Parent:WaitForChild("BuildLedger")).new(Config.MaxPieces)
 local last: {[Player]: number} = {}
 local function key(p: Vector3): string
     return string.format("%d:%d:%d", p.X, p.Y, p.Z)
@@ -41,12 +41,11 @@ request.OnServerEvent:Connect(function(player: Player, action: any, position: an
     local id = key(position)
     local existing = occupied[id]
     if action == "remove" then
-        if not existing or existing:GetAttribute("OwnerUserId") ~= player.UserId then return end
+        if not existing or not ledger.remove(player.UserId, id) then return end
         occupied[id] = nil
         existing:Destroy()
-        counts[player] = math.max(0,(counts[player] or 0)-1)
     else
-        if existing or (counts[player] or 0) >= Config.MaxPieces then return end
+        if existing or not ledger.canPlace(player.UserId, id) then return end
         local overlap = OverlapParams.new()
         overlap.RespectCanCollide = true
         if #workspace:GetPartBoundsInBox(CFrame.new(position), Vector3.one*(Config.Grid-0.1), overlap) > 0 then return end
@@ -54,16 +53,16 @@ request.OnServerEvent:Connect(function(player: Player, action: any, position: an
         part.Name = "CreativeBlock"; part.Anchored = true
         part.Size = Vector3.one*Config.Grid; part.Position = position
         part.Color = colors[color]; part:SetAttribute("OwnerUserId",player.UserId)
+        if not ledger.place(player.UserId, id) then part:Destroy(); return end
         part.Parent = builds; occupied[id] = part
-        counts[player] = (counts[player] or 0)+1
     end
-    result:FireClient(player, action, counts[player], Config.MaxPieces)
+    result:FireClient(player, action, ledger.count(player.UserId), Config.MaxPieces)
 end)
 Players.PlayerRemoving:Connect(function(player)
-    for id, part in pairs(occupied) do
-        if part:GetAttribute("OwnerUserId") == player.UserId then
-            occupied[id] = nil; part:Destroy()
-        end
+    for _, id in ipairs(ledger.clear(player.UserId)) do
+        local part = occupied[id]
+        occupied[id] = nil
+        if part then part:Destroy() end
     end
-    counts[player] = nil; last[player] = nil
+    last[player] = nil
 end)
