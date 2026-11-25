@@ -79,3 +79,6 @@ Branch validation/build-ownership-v326: módulo BuildLedger (ef7ee913), testes d
 
 ## v3.27 — propriedade e ocupação validadas (25/11/2026)
 CI do PR #5, head fae2f0223d210024618e6f1d4ab69abaac61a031, execução 45578355179: 14 etapas aprovadas, incluindo compilação Luau, testes de corrida, codec e propriedade de construção, build Rojo e upload. PR #5 integrado à main, merge 41b442466e1f4dc420698630f4f391a443343cde. Testes de módulo puro não comprovam colisões físicas ou multiplayer real. Próxima frente: exploração e aventuras, com testes funcionais independentes. Sem publicação ou ativação do DataStore nesta rodada. Estimativa comercial de 30% permanece não auditada.
+
+## v3.28 — regras do Desafio das Nuvens (25/11/2026)
+Branch feature/cloud-challenge-v328: módulo CloudChallenge (7bf7ad0c), integrado ao servidor (fbd635da), testes CLI de sequência, repetição, conclusão, reset e isolamento (49e8a15c). Gate CI acrescentado. Commits confirmados; execução CI e integração à main pendentes. Não constitui nova aventura nem homologação Roblox. Próximo passo: validar CI e ampliar conteúdo explorável. Sem publicação ou DataStore.
