@@ -97,3 +97,6 @@ Branch feature/color-trail-v332: novo minijogo de quatro portais numerados, 30 s
 
 ## v3.33 — Trilha das Cores integrada (25/11/2026)
 PR #8 integrado à main, merge c50e069500cdc165a4f34757c839f9ebeafe3756. CI 45687584675, job 139464157133: 17 etapas aprovadas, incluindo compilação Luau, seis suítes funcionais, build Rojo e upload. Sequência, prazo, isolamento e conclusão única por tentativa validados em CLI. Homologação física e multiplayer real pendentes. Próxima frente: competição por melhores tempos e preparação de testes Studio. Sem publicação ou ativação de DataStore. Estimativa comercial anterior de 30% não auditada.
+
+## v3.34 — competição por melhores tempos (25/11/2026)
+Branch feature/color-ranking-v334: ranking de sessão da Trilha das Cores, top 5 em painel físico, recorde pessoal calculado no servidor, desempate determinístico por UserId e precisão de milissegundos. Módulo 50f224cf e testes 751ada58; integração e gate CI registrados. Compilação, testes e integração à main ainda pendentes. Não é ranking global persistente; sem DataStore ou publicação. Próximo passo: validar CI e homologar painel e competição em Roblox.
