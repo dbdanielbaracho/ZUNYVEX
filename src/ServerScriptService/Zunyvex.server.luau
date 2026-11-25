@@ -130,6 +130,8 @@ end)
 
 -- Color Trail: independent timed challenge on the generated island.
 local Trail = require(RS:WaitForChild("ColorTrail"))
+local Ranking = require(RS:WaitForChild("TrailRanking"))
+local bestTimes: Ranking.State = {}
 local attempts: {[Player]: Trail.State} = {}
 local startAt: {[Player]: number} = {}
 Players.PlayerRemoving:Connect(function(p) attempts[p]=nil; startAt[p]=nil end)
@@ -147,6 +149,23 @@ local function label(p: Part, message: string)
     t.BackgroundTransparency=0.25; t.TextScaled=true; t.Text=message; t.Parent=gui
 end
 label(startPad,"Trilha das Cores: 30s")
+local board = part("ColorTrailRanking", Vector3.new(-60,4,63), Vector3.new(10,8,1), Color3.fromRGB(35,45,75), true)
+local surface = Instance.new("SurfaceGui")
+surface.Face = Enum.NormalId.Front; surface.Parent = board
+local rankingText = Instance.new("TextLabel")
+rankingText.Size = UDim2.fromScale(1,1); rankingText.TextScaled = true
+rankingText.BackgroundColor3 = Color3.fromRGB(35,45,75)
+rankingText.TextColor3 = Color3.fromRGB(255,255,255)
+rankingText.Parent = surface
+local names: {[number]: string} = {}
+local function refreshRanking()
+    local lines = {"Melhores tempos • sessão"}
+    for i, entry in Ranking.top(bestTimes,5) do
+        table.insert(lines,string.format("%d. %s — %.3fs",i,names[entry.userId] or tostring(entry.userId),entry.milliseconds/1000))
+    end
+    rankingText.Text = table.concat(lines,"\n")
+end
+refreshRanking()
 startPad.Touched:Connect(function(hit)
     local p=playerFromHit(hit); if not p or not state[p] then return end
     local now=os.clock()
@@ -171,8 +190,12 @@ for i=1,4 do
     gate.Touched:Connect(function(hit)
         local p=playerFromHit(hit); if not p or not state[p] then return end
         local attempt=attempts[p]; if not attempt then return end
-        local result=Trail.touch(attempt,i,os.clock())
-        if result=="finished" then reward(p,15,0,"Trilha das Cores concluída!")
+        local now=os.clock()
+        local result=Trail.touch(attempt,i,now)
+        if result=="finished" then
+            local improved=Ranking.record(bestTimes,p.UserId,now-attempt.started)
+            if improved then names[p.UserId]=p.Name; refreshRanking() end
+            reward(p,15,0,string.format("Trilha concluída: %.3fs%s",now-attempt.started,if improved then " — recorde pessoal!" else ""))
         elseif result=="advanced" then notice:FireClient(p,string.format("Portal %d/4",i))
         elseif result=="expired" then notice:FireClient(p,"Tempo esgotado. Tente novamente!") end
     end)
