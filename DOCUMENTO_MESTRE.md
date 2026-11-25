@@ -100,3 +100,6 @@ PR #8 integrado à main, merge c50e069500cdc165a4f34757c839f9ebeafe3756. CI 4568
 
 ## v3.34 — competição por melhores tempos (25/11/2026)
 Branch feature/color-ranking-v334: ranking de sessão da Trilha das Cores, top 5 em painel físico, recorde pessoal calculado no servidor, desempate determinístico por UserId e precisão de milissegundos. Módulo 50f224cf e testes 751ada58; integração e gate CI registrados. Compilação, testes e integração à main ainda pendentes. Não é ranking global persistente; sem DataStore ou publicação. Próximo passo: validar CI e homologar painel e competição em Roblox.
+
+## v3.35 — ranking competitivo integrado (25/11/2026)
+PR #9 integrado à main, merge a1263b795fe8973c92d44e0b34d6a522cc1195b2. CI 45705311505, job 139525650674: 18 etapas aprovadas, incluindo compilação Luau, sete suítes funcionais, build Rojo e upload. Ranking de sessão validado em CLI; painel físico, integridade da movimentação e competição multiplayer ainda exigem homologação no motor Roblox. Sem publicação ou ativação de DataStore. Próxima frente: compartilhamento seguro de criações e preparação de testes Studio. Estimativa comercial anterior de 30% não auditada.
