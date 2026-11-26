@@ -119,3 +119,6 @@ ContactGuard (4e8a448e), nove assertions (26771be7), integração em sete pontos
 
 ## v3.40 — proteção de contato integrada (26/11/2026)
 PR #12 integrado à main, merge f6137e0937a257e1fe25902e83b8551e8e2cc46f. Head validado 301bc319d3629c99f21f5199ec7d38772f0b04b0; CI 45831771589, job 139950089097: 20 etapas aprovadas, incluindo compilação Luau, nove suítes funcionais, build Rojo e upload. Artefato 15122344211 (13216 bytes). Sete pontos de contato protegidos, nove assertions de ContactGuard aprovadas. Não comprova física ou proteção contra teleporte no motor. Matriz de homologação real permanece pendente; sem publicação ou DataStore. Próximo passo: ampliar conteúdo jogável e revisar limites de estado por sessão. Estimativa comercial histórica de 30% não auditada.
+
+## v3.41 — Desafio da Memória (26/11/2026; proposta em branch)
+Novo minijogo de sequência aleatória de quatro números, três segundos de memorização, 25 segundos de resposta e 20 estrelas por conclusão. Módulo 3f5db72d, testes 0883d864, integração 5a9ac82f e gate CI b619a816. Estado por jogador, limpeza ao morrer/sair e proteção ContactGuard. Compilação, testes, build e merge pendentes; validar legibilidade do aviso, contatos repetidos e jogabilidade real. Sem publicação ou DataStore. Estimativa comercial histórica de 30% não auditada.

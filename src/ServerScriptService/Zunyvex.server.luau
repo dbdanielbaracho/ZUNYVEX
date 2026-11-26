@@ -231,3 +231,60 @@ for i, pos in relicPositions do
         end
     end)
 end
+
+-- Memory challenge: memorize four numbered pads, then reproduce the sequence.
+local MemoryMatch = require(RS:WaitForChild("MemoryMatch"))
+local memoryAttempts: {[Player]: MemoryMatch.State} = {}
+local memoryReady: {[Player]: number} = {}
+local memoryCooldown: {[Player]: number} = {}
+local rng = Random.new()
+local function clearMemory(p: Player)
+    memoryAttempts[p]=nil; memoryReady[p]=nil
+end
+local function bindMemory(p: Player)
+    p.CharacterRemoving:Connect(function() clearMemory(p) end)
+end
+Players.PlayerAdded:Connect(bindMemory)
+for _, p in Players:GetPlayers() do bindMemory(p) end
+Players.PlayerRemoving:Connect(function(p) clearMemory(p); memoryCooldown[p]=nil end)
+local memoryStart=part("MemoryStart",Vector3.new(45,1,75),Vector3.new(6,4,6),Color3.fromRGB(240,240,240),false)
+label(memoryStart,"Memória: memorize 4 números")
+memoryStart.Touched:Connect(function(hit)
+    local p=playerFromHit(hit,memoryStart); if not p or not state[p] then return end
+    local now=os.clock()
+    if memoryCooldown[p] and now-memoryCooldown[p]<3 then return end
+    local old=memoryAttempts[p]
+    if old and old.active and now-old.started<=25 then return end
+    memoryCooldown[p]=now
+    local sequence={rng:NextInteger(1,4),rng:NextInteger(1,4),rng:NextInteger(1,4),rng:NextInteger(1,4)}
+    local attempt=MemoryMatch.start(sequence,now+3)
+    memoryAttempts[p]=attempt; memoryReady[p]=now+3
+    notice:FireClient(p,string.format("Memorize: %d - %d - %d - %d",sequence[1],sequence[2],sequence[3],sequence[4]))
+    task.delay(3,function()
+        if memoryAttempts[p]==attempt and state[p] then notice:FireClient(p,"Repita a sequência nos painéis!") end
+    end)
+    task.delay(28.1,function()
+        if memoryAttempts[p]==attempt and attempt.active then
+            clearMemory(p)
+            if state[p] then notice:FireClient(p,"Tempo esgotado!") end
+        end
+    end)
+end)
+for i=1,4 do
+    local pad=part("MemoryPad_"..i,Vector3.new(30+i*10,1,90),Vector3.new(5,4,5),colors[i],false)
+    label(pad,tostring(i))
+    local lastTouch: {[Player]: number} = {}
+    Players.PlayerRemoving:Connect(function(p) lastTouch[p]=nil end)
+    pad.Touched:Connect(function(hit)
+        local p=playerFromHit(hit,pad); if not p or not state[p] then return end
+        local attempt=memoryAttempts[p]; local ready=memoryReady[p]
+        local now=os.clock()
+        if not attempt or not ready or now<ready then return end
+        if lastTouch[p] and now-lastTouch[p]<0.8 then return end
+        lastTouch[p]=now
+        local result=MemoryMatch.touch(attempt,i,now)
+        if result=="finished" then clearMemory(p); reward(p,20,0,"Desafio da Memória concluído!")
+        elseif result=="wrong" or result=="expired" then clearMemory(p); notice:FireClient(p,"Tente novamente!")
+        elseif result=="advanced" then notice:FireClient(p,string.format("Memória: %d/4",attempt.nextIndex-1)) end
+    end)
+end
