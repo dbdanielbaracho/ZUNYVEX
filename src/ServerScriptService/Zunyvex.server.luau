@@ -3,6 +3,7 @@
 local Players = game:GetService("Players")
 local RS = game:GetService("ReplicatedStorage")
 local Config = require(RS:WaitForChild("GameConfig"))
+local ContactGuard = require(RS:WaitForChild("ContactGuard"))
 local Challenge = require(RS:WaitForChild("CloudChallenge"))
 local DiscoveryLedger = require(RS:WaitForChild("DiscoveryLedger"))
 if game.PlaceId ~= 112566849572143 and not game:GetService("RunService"):IsStudio() then return end
@@ -30,13 +31,17 @@ end
 Players.PlayerAdded:Connect(init)
 Players.PlayerRemoving:Connect(function(p) state[p] = nil end)
 for _, p in Players:GetPlayers() do init(p) end
-local function playerFromHit(hit: BasePart): Player?
+local function playerFromHit(hit: BasePart, target: BasePart): Player?
     local model = hit:FindFirstAncestorOfClass("Model")
     if not model then return nil end
     local h = model:FindFirstChildOfClass("Humanoid")
     if not h or h.Health <= 0 then return nil end
     local p = Players:GetPlayerFromCharacter(model)
-    if p and p.Character == model then return p end
+    local root = model:FindFirstChild("HumanoidRootPart")
+    if p and p.Character == model and root and root:IsA("BasePart") then
+        local radius = target.Size.Magnitude / 2 + 8
+        if ContactGuard.near((root.Position - target.Position).Magnitude, radius) then return p end
+    end
     return nil
 end
 local function reward(p: Player, points: number, crystals: number, message: string)
@@ -67,7 +72,7 @@ for i = 1, Config.CrystalCount do
     crystal.Material = Enum.Material.Neon
     local available = true
     crystal.Touched:Connect(function(hit)
-        local p = playerFromHit(hit)
+        local p = playerFromHit(hit, crystal)
         if not p or not state[p] or not available then return end
         available = false; crystal.CanTouch = false; crystal.Transparency = 1
         reward(p, Config.CrystalPoints, 1, "Cristal descoberto!")
@@ -81,7 +86,7 @@ portal.Material = Enum.Material.Neon; portal.Transparency = 0.35
 local portalAt: {[Player]: number} = {}
 Players.PlayerRemoving:Connect(function(p) portalAt[p] = nil end)
 portal.Touched:Connect(function(hit)
-    local p = playerFromHit(hit); if not p then return end
+    local p = playerFromHit(hit, portal); if not p then return end
     local now = os.clock()
     if portalAt[p] and now - portalAt[p] < 2 then return end
     portalAt[p] = now
@@ -95,7 +100,7 @@ for i = 1, Config.ObbyCheckpoints do
     local gate = part("CloudCheckpoint_"..i, pos+Vector3.new(0,3,0), Vector3.new(6,4,6), Color3.fromRGB(255,215,90), false)
     gate.Transparency = 0.6
     gate.Touched:Connect(function(hit)
-        local p = playerFromHit(hit); if not p then return end
+        local p = playerFromHit(hit, gate); if not p then return end
         local s = state[p]; if not s then return end
         local result = Challenge.advance(s, i, Config.ObbyCheckpoints)
         if result == "ignored" then return end
@@ -122,7 +127,7 @@ local beacon = part("SunsetDiscovery", Vector3.new(169,2,10), Vector3.new(6,6,6)
 beacon.Material = Enum.Material.Neon
 beacon.Shape = Enum.PartType.Ball
 beacon.Touched:Connect(function(hit)
-    local p = playerFromHit(hit)
+    local p = playerFromHit(hit, beacon)
     if not p or not state[p] then return end
     if not DiscoveryLedger.claim(discovered, p.UserId, "sunset") then return end
     reward(p, 25, 0, "Ilha do Pôr do Sol descoberta!")
@@ -167,7 +172,7 @@ local function refreshRanking()
 end
 refreshRanking()
 startPad.Touched:Connect(function(hit)
-    local p=playerFromHit(hit); if not p or not state[p] then return end
+    local p=playerFromHit(hit, startPad); if not p or not state[p] then return end
     local now=os.clock()
     if startAt[p] and now-startAt[p]<2 then return end
     local old=attempts[p]
@@ -188,7 +193,7 @@ for i=1,4 do
     gate.Material=Enum.Material.Neon; gate.Transparency=0.35
     label(gate,tostring(i))
     gate.Touched:Connect(function(hit)
-        local p=playerFromHit(hit); if not p or not state[p] then return end
+        local p=playerFromHit(hit, gate); if not p or not state[p] then return end
         local attempt=attempts[p]; if not attempt then return end
         local now=os.clock()
         local result=Trail.touch(attempt,i,now)
@@ -214,7 +219,7 @@ for i, pos in relicPositions do
     relic.Shape=Enum.PartType.Ball; relic.Material=Enum.Material.Neon
     label(relic,"Relíquia "..i.."/5")
     relic.Touched:Connect(function(hit)
-        local p=playerFromHit(hit)
+        local p=playerFromHit(hit, relic)
         if not p or not state[p] then return end
         local expedition=expeditions[p.UserId]
         if not expedition then expedition=Expedition.new(); expeditions[p.UserId]=expedition end

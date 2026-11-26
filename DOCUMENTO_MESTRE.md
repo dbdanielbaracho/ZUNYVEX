@@ -112,3 +112,7 @@ PR #11 integrado à main, merge 309326bf8bf388b7a35e737210a5f6edf6342f43. Head v
 
 ## v3.38 — matriz de homologação Roblox (26/11/2026)
 Criado docs/HOMOLOGACAO_ROBLOX.md, commit 3f3f701326bd2bbc9ceed81a8f1d9c5ab5bd8ed1, leitura remota idêntica. Define 16 casos de aceitação multiplayer, segurança, física, recompensas, latência e interface móvel, com evidências e critérios de saída. 0/16 executados; entrega documental, sem alteração Luau, build novo ou publicação. DataStore permanece desativado. Próximo passo: automatizar verificações de integração viáveis e ampliar conteúdo jogável; executar matriz em Studio autorizado quando disponível. Estimativa comercial de 30% permanece não auditada.
+
+
+## v3.39 — proteção de contato (26/11/2026; proposta em branch)
+ContactGuard (4e8a448e), nove assertions (26771be7), integração em sete pontos de contato do servidor (3699e20b), gate CI (0d9f2afc). Rejeita distâncias inválidas e contatos fora de raio conservador observado pelo servidor. Não impede teleporte fraudulento por si só; tolerância e física exigem homologação. Compilação, testes, build e merge ainda pendentes. Sem publicação ou DataStore. Próximo passo: validar CI e testar contatos reais.
