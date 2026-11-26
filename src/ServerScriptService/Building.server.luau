@@ -55,7 +55,7 @@ request.OnServerEvent:Connect(function(player: Player, action: any, position: an
     local id = key(position)
     local existing = occupied[id]
     if action == "recolor" then
-        if not existing or ledger.ownerOf(id) ~= player.UserId then return end
+        if not existing or not ledger.canRecolor(player.UserId, id) then return end
         existing.Color = colors[color]
     elseif action == "remove" then
         local ownerId = ledger.ownerOf(id)
