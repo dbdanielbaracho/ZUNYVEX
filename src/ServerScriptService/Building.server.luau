@@ -43,7 +43,7 @@ request.OnServerEvent:Connect(function(player: Player, action: any, position: an
     local now = os.clock()
     if last[player] and now - last[player] < Config.MinInterval then return end
     last[player] = now
-    if action ~= "place" and action ~= "remove" then return end
+    if action ~= "place" and action ~= "remove" and action ~= "recolor" then return end
     if typeof(position) ~= "Vector3" then return end
     local entry = {x=position.X,y=position.Y,z=position.Z,color=if action == "remove" then "Sky" else color}
     if not Codec.encode({entry}) then return end
@@ -54,7 +54,10 @@ request.OnServerEvent:Connect(function(player: Player, action: any, position: an
     if (root.Position-position).Magnitude > Config.MaxDistance then return end
     local id = key(position)
     local existing = occupied[id]
-    if action == "remove" then
+    if action == "recolor" then
+        if not existing or ledger.ownerOf(id) ~= player.UserId then return end
+        existing.Color = colors[color]
+    elseif action == "remove" then
         local ownerId = ledger.ownerOf(id)
         if not existing or not ledger.remove(player.UserId, id) then return end
         if ownerId and ownerId ~= player.UserId then
