@@ -126,3 +126,7 @@ Novo minijogo de sequência aleatória de quatro números, três segundos de mem
 
 ## v3.42 — Desafio da Memória integrado (26/11/2026)
 PR #13 integrado à main, merge f6463caf7212b399680cf9aabc868e1e1f9cc082. Head validado 7ead972b93ec7da34c429effc0794d7edca6c65e; CI 45851597915, job 140019087691: 21 etapas aprovadas, incluindo compilação Luau, dez suítes funcionais, build Rojo e upload. Artefato 15133623075 (13947 bytes). Homologação física, multiplayer e mobile pendentes; revisar contatos repetidos e legibilidade do aviso no motor. Sem publicação ou DataStore. Próximo passo: ampliar construção livre e revisar limites de estado por sessão. Estimativa comercial histórica de 30% não auditada.
+
+
+## v3.43 — pintura de blocos (26/11/2026; proposta em branch)
+Interface e servidor de pintura registrados anteriormente (2eeeaf5b, 7d13a13f). Política exclusiva do proprietário extraída para BuildLedger (7ad2ba11), usada no servidor (53ce44cb) e coberta por assertions de autorização, colaboração, capacidade e troca de proprietário (46a13bfe). Testes escritos, execução CI e merge pendentes; validação de cores continua no codec. Sem homologação Roblox, publicação ou DataStore. Próximo passo: validar CI e integrar após sucesso.

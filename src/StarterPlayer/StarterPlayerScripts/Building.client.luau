@@ -39,6 +39,7 @@ local toggle = button("Criar")
 local palette = button("Cor: Sky")
 local place = button("Colocar")
 local remove = button("Remover")
+local recolor = button("Pintar bloco")
 local status = button("0 / "..config.MaxPieces)
 status.Active = false
 local selectGuest = button("Escolher colaborador")
@@ -91,6 +92,7 @@ local function refresh()
     palette.Visible = active
     place.Visible = active
     remove.Visible = active
+    recolor.Visible = active
     status.Visible = active
     selectGuest.Visible = active
     grant.Visible = active
@@ -115,7 +117,7 @@ local function submit(action: string)
     if not hit then return end
     local target = hit.Instance
     local position: Vector3
-    if action == "remove" then
+    if action == "remove" or action == "recolor" then
         if not target:IsA("BasePart") or target.Name ~= "CreativeBlock" then return end
         position = target.Position
     else
@@ -128,6 +130,7 @@ toggle.Activated:Connect(function() active = not active; refresh() end)
 palette.Activated:Connect(function() index = index % #colors + 1; palette.Text = "Cor: "..colors[index] end)
 place.Activated:Connect(function() submit("place") end)
 remove.Activated:Connect(function() submit("remove") end)
+recolor.Activated:Connect(function() submit("recolor") end)
 UIS.InputBegan:Connect(function(input, processed)
     if processed or not active then return end
     if input.KeyCode == Enum.KeyCode.E then submit("place") end
