@@ -130,3 +130,7 @@ PR #13 integrado à main, merge f6463caf7212b399680cf9aabc868e1e1f9cc082. Head v
 
 ## v3.43 — pintura de blocos (26/11/2026; proposta em branch)
 Interface e servidor de pintura registrados anteriormente (2eeeaf5b, 7d13a13f). Política exclusiva do proprietário extraída para BuildLedger (7ad2ba11), usada no servidor (53ce44cb) e coberta por assertions de autorização, colaboração, capacidade e troca de proprietário (46a13bfe). Testes escritos, execução CI e merge pendentes; validação de cores continua no codec. Sem homologação Roblox, publicação ou DataStore. Próximo passo: validar CI e integrar após sucesso.
+
+
+## v3.44 — pintura de blocos integrada (26/11/2026)
+PR #14 integrado à main, merge 1c2184af63906d92532e33d90dc573a6d619bbe3. Head validado 17ee9e1934bcece6e3d2b6dac5b83f3c7ae3055c; CI 45898956091, job 140179737174: 21 etapas aprovadas, incluindo compilação Luau, dez suítes funcionais (regressões de autorização de pintura na suíte BuildLedger), build Rojo e upload. Artefato 15155415265 (14020 bytes). Homologação física, multiplayer e mobile pendentes; testes CLI não comprovam interação real. Sem publicação ou ativação do DataStore. Próxima frente: ampliar construção livre e minijogos cooperativos, revisar limites de estado por sessão. Estimativa comercial histórica de 30% não auditada.
