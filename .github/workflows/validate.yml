@@ -60,6 +60,9 @@ jobs:
       - name: Execute trail ranking tests
         run: |
           "$RUNNER_TEMP/luau-build/luau" tests/TrailRanking.spec.luau
+      - name: Execute relic expedition tests
+        run: |
+          "$RUNNER_TEMP/luau-build/luau" tests/Expedition.spec.luau
       - name: Install Rojo
         run: cargo install rojo --version 7.4.4 --locked
       - name: Build private place artifact
