@@ -116,3 +116,6 @@ Criado docs/HOMOLOGACAO_ROBLOX.md, commit 3f3f701326bd2bbc9ceed81a8f1d9c5ab5bd8e
 
 ## v3.39 — proteção de contato (26/11/2026; proposta em branch)
 ContactGuard (4e8a448e), nove assertions (26771be7), integração em sete pontos de contato do servidor (3699e20b), gate CI (0d9f2afc). Rejeita distâncias inválidas e contatos fora de raio conservador observado pelo servidor. Não impede teleporte fraudulento por si só; tolerância e física exigem homologação. Compilação, testes, build e merge ainda pendentes. Sem publicação ou DataStore. Próximo passo: validar CI e testar contatos reais.
+
+## v3.40 — proteção de contato integrada (26/11/2026)
+PR #12 integrado à main, merge f6137e0937a257e1fe25902e83b8551e8e2cc46f. Head validado 301bc319d3629c99f21f5199ec7d38772f0b04b0; CI 45831771589, job 139950089097: 20 etapas aprovadas, incluindo compilação Luau, nove suítes funcionais, build Rojo e upload. Artefato 15122344211 (13216 bytes). Sete pontos de contato protegidos, nove assertions de ContactGuard aprovadas. Não comprova física ou proteção contra teleporte no motor. Matriz de homologação real permanece pendente; sem publicação ou DataStore. Próximo passo: ampliar conteúdo jogável e revisar limites de estado por sessão. Estimativa comercial histórica de 30% não auditada.
