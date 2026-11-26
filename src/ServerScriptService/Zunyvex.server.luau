@@ -200,3 +200,29 @@ for i=1,4 do
         elseif result=="expired" then notice:FireClient(p,"Tempo esgotado. Tente novamente!") end
     end)
 end
+
+-- Expedition: find five relics in any order, independently per player.
+local Expedition = require(RS:WaitForChild("Expedition"))
+local expeditions: {[number]: Expedition.State} = {}
+local relicPositions = {
+    Vector3.new(-90,2,-35), Vector3.new(85,2,35),
+    Vector3.new(150,2,16), Vector3.new(35,2,-85),
+    Vector3.new(-85,2,85),
+}
+for i, pos in relicPositions do
+    local relic = part("ExpeditionRelic_"..i,pos,Vector3.new(3,3,3),Color3.fromRGB(255,125,220),false)
+    relic.Shape=Enum.PartType.Ball; relic.Material=Enum.Material.Neon
+    label(relic,"Relíquia "..i.."/5")
+    relic.Touched:Connect(function(hit)
+        local p=playerFromHit(hit)
+        if not p or not state[p] then return end
+        local expedition=expeditions[p.UserId]
+        if not expedition then expedition=Expedition.new(); expeditions[p.UserId]=expedition end
+        local result=Expedition.collect(expedition,i)
+        if result=="finished" then
+            reward(p,40,0,"Expedição das Relíquias concluída!")
+        elseif result=="advanced" then
+            notice:FireClient(p,string.format("Relíquias encontradas: %d/5",expedition.count))
+        end
+    end)
+end
