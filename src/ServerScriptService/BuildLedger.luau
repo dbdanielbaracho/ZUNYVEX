@@ -22,6 +22,9 @@ function Ledger.new(limit: number)
     function state.ownerOf(id: string): number?
         return cells[id]
     end
+    function state.canRecolor(actor: number, id: string): boolean
+        return cells[id] == actor
+    end
     function state.count(owner: number): number
         return counts[owner] or 0
     end
