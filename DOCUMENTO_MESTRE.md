@@ -122,3 +122,7 @@ PR #12 integrado à main, merge f6137e0937a257e1fe25902e83b8551e8e2cc46f. Head v
 
 ## v3.41 — Desafio da Memória (26/11/2026; proposta em branch)
 Novo minijogo de sequência aleatória de quatro números, três segundos de memorização, 25 segundos de resposta e 20 estrelas por conclusão. Módulo 3f5db72d, testes 0883d864, integração 5a9ac82f e gate CI b619a816. Estado por jogador, limpeza ao morrer/sair e proteção ContactGuard. Compilação, testes, build e merge pendentes; validar legibilidade do aviso, contatos repetidos e jogabilidade real. Sem publicação ou DataStore. Estimativa comercial histórica de 30% não auditada.
+
+
+## v3.42 — Desafio da Memória integrado (26/11/2026)
+PR #13 integrado à main, merge f6463caf7212b399680cf9aabc868e1e1f9cc082. Head validado 7ead972b93ec7da34c429effc0794d7edca6c65e; CI 45851597915, job 140019087691: 21 etapas aprovadas, incluindo compilação Luau, dez suítes funcionais, build Rojo e upload. Artefato 15133623075 (13947 bytes). Homologação física, multiplayer e mobile pendentes; revisar contatos repetidos e legibilidade do aviso no motor. Sem publicação ou DataStore. Próximo passo: ampliar construção livre e revisar limites de estado por sessão. Estimativa comercial histórica de 30% não auditada.
