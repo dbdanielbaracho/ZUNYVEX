@@ -17,11 +17,25 @@ local function remote(name: string): RemoteEvent
 end
 local request = remote("BuildRequest")
 local result = remote("BuildResult")
+local share = remote("BuildShareRequest")
+local shareResult = remote("BuildShareResult")
 local builds = folder(workspace, "ZunyvexBuilds")
 local colors = {Sky = Color3.fromRGB(80,180,255), Pink = Color3.fromRGB(255,120,190), Gold = Color3.fromRGB(255,210,70), Mint = Color3.fromRGB(100,230,170)}
 local occupied: {[string]: Part} = {}
 local ledger = require(script.Parent:WaitForChild("BuildLedger")).new(Config.MaxPieces)
 local last: {[Player]: number} = {}
+local shareLast: {[Player]: number} = {}
+share.OnServerEvent:Connect(function(player: Player, guestId: any, allowed: any)
+    if typeof(guestId) ~= "number" or guestId ~= guestId or guestId % 1 ~= 0 or math.abs(guestId) > 9007199254740991 or typeof(allowed) ~= "boolean" then return end
+    local now = os.clock()
+    if shareLast[player] and now - shareLast[player] < 0.25 then return end
+    shareLast[player] = now
+    local guest = Players:GetPlayerByUserId(guestId)
+    if not guest or guest == player then return end
+    if ledger.setCollaborator(player.UserId, guestId, allowed) then
+        shareResult:FireClient(player, guestId, allowed)
+    end
+end)
 local function key(p: Vector3): string
     return string.format("%d:%d:%d", p.X, p.Y, p.Z)
 end
@@ -41,7 +55,12 @@ request.OnServerEvent:Connect(function(player: Player, action: any, position: an
     local id = key(position)
     local existing = occupied[id]
     if action == "remove" then
+        local ownerId = ledger.ownerOf(id)
         if not existing or not ledger.remove(player.UserId, id) then return end
+        if ownerId and ownerId ~= player.UserId then
+            local owner = Players:GetPlayerByUserId(ownerId)
+            if owner then result:FireClient(owner, action, ledger.count(ownerId), Config.MaxPieces) end
+        end
         occupied[id] = nil
         existing:Destroy()
     else
@@ -65,4 +84,5 @@ Players.PlayerRemoving:Connect(function(player)
         if part then part:Destroy() end
     end
     last[player] = nil
+    shareLast[player] = nil
 end)

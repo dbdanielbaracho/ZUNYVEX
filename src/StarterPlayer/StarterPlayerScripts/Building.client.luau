@@ -8,13 +8,18 @@ local config = require(RS:WaitForChild("GameConfig")).Build
 local remotes = RS:WaitForChild("ZunyvexRemotes")
 local request = remotes:WaitForChild("BuildRequest") :: RemoteEvent
 local result = remotes:WaitForChild("BuildResult") :: RemoteEvent
+local share = remotes:WaitForChild("BuildShareRequest") :: RemoteEvent
+local shareResult = remotes:WaitForChild("BuildShareResult") :: RemoteEvent
 local gui = Instance.new("ScreenGui")
 gui.Name = "ZUNYVEX_Build"
 gui.ResetOnSpawn = false
 gui.Parent = player:WaitForChild("PlayerGui")
-local panel = Instance.new("Frame")
+local panel = Instance.new("ScrollingFrame")
+panel.AutomaticCanvasSize = Enum.AutomaticSize.Y
+panel.CanvasSize = UDim2.fromOffset(0, 0)
+panel.ScrollBarThickness = 5
 panel.Size = UDim2.fromOffset(184, 226)
-panel.Position = UDim2.new(0, 12, 0.25, 0)
+panel.Position = UDim2.new(0, 12, 0.12, 0)
 panel.BackgroundColor3 = Color3.fromRGB(28,36,75)
 panel.Parent = gui
 local layout = Instance.new("UIListLayout")
@@ -36,6 +41,47 @@ local place = button("Colocar")
 local remove = button("Remover")
 local status = button("0 / "..config.MaxPieces)
 status.Active = false
+local selectGuest = button("Escolher colaborador")
+local grant = button("Permitir")
+local revoke = button("Revogar")
+local feedback = button("Sem seleção")
+feedback.Active = false
+local guestId: number? = nil
+local function chooseGuest()
+    local guests = {}
+    for _, guest in ipairs(Players:GetPlayers()) do
+        if guest ~= player then table.insert(guests, guest) end
+    end
+    table.sort(guests, function(a, b) return a.UserId < b.UserId end)
+    local nextIndex = 1
+    for i, guest in ipairs(guests) do
+        if guest.UserId == guestId then nextIndex = i % #guests + 1; break end
+    end
+    local guest = guests[nextIndex]
+    guestId = if guest then guest.UserId else nil
+    selectGuest.Text = if guest then "@" .. guest.Name else "Sem colaboradores"
+    feedback.Text = "Selecione uma ação"
+end
+selectGuest.Activated:Connect(chooseGuest)
+local function changeAccess(allowed: boolean)
+    local id = guestId
+    if id and Players:GetPlayerByUserId(id) then
+        share:FireServer(id, allowed)
+        feedback.Text = "Aguardando servidor"
+    end
+end
+grant.Activated:Connect(function() changeAccess(true) end)
+revoke.Activated:Connect(function() changeAccess(false) end)
+shareResult.OnClientEvent:Connect(function(id: number, allowed: boolean)
+    if id == guestId then feedback.Text = if allowed then "Acesso permitido" else "Acesso revogado" end
+end)
+Players.PlayerRemoving:Connect(function(guest)
+    if guest.UserId == guestId then
+        guestId = nil
+        selectGuest.Text = "Escolher colaborador"
+        feedback.Text = "Jogador saiu"
+    end
+end)
 local active = false
 local colors = {"Sky","Pink","Gold","Mint"}
 local index = 1
@@ -46,7 +92,11 @@ local function refresh()
     place.Visible = active
     remove.Visible = active
     status.Visible = active
-    panel.Size = UDim2.fromOffset(184, if active then 216 else 40)
+    selectGuest.Visible = active
+    grant.Visible = active
+    revoke.Visible = active
+    feedback.Visible = active
+    panel.Size = if active then UDim2.new(0, 184, 0.75, 0) else UDim2.fromOffset(184, 40)
 end
 local function snap(p: Vector3): Vector3
     local g = config.Grid
@@ -66,7 +116,7 @@ local function submit(action: string)
     local target = hit.Instance
     local position: Vector3
     if action == "remove" then
-        if not target:IsA("BasePart") or target.Name ~= "CreativeBlock" or target:GetAttribute("OwnerUserId") ~= player.UserId then return end
+        if not target:IsA("BasePart") or target.Name ~= "CreativeBlock" then return end
         position = target.Position
     else
         position = snap(hit.Position + hit.Normal*(config.Grid/2))
