@@ -170,3 +170,7 @@ Nova região acessível por ponte, cinco rochas decorativas e cristal de descobe
 
 ## v3.54 — Ilha da Lua integrada (27/11/2026)
 PR #19 integrado à main no merge eb94c58f7cebecc2f619e711500c30ee7e077ae8. Head validado 5bd936024a6ccc0995ca017193794f2d2e818324; CI 46043550819, job 140657041985: 23 etapas aprovadas, incluindo compilação Luau, 12 suítes CLI (seis novas assertions de descoberta), build Rojo e upload. Artefato 15220818451 (15664 bytes), digest sha256:2398f17f6a38a529a36a54484ccd2e3ea3cfbaa2eee002633128d29717e56d20. Homologação física da ponte, contatos, recompensas e multiplayer permanece pendente. Sem publicação ou DataStore. Próxima frente: ampliar aventuras e cobertura de integração. Estimativa comercial histórica de 30% não auditada.
+
+
+## v3.55 — Observatório Lunar (27/11/2026; proposta em branch)
+Aventura opcional com cinco plataformas ascendentes e estrela de descoberta de 30 estrelas, controlada pelo servidor (2f982eb16cc10e6e498ad8213842969553103953). Oito assertions adicionais em DiscoveryLedger cobrem independência da descoberta lunar, duplicidade, isolamento e sessão nova (cfcea16b86e0249c0dc98420f821bf7439308c7a; leitura remota idêntica). CI, build, merge e homologação física pendentes. Sem publicação ou DataStore nesta rodada. Estimativa comercial histórica de 30% não auditada. Próximo passo: validar CI e testar saltos e recompensas no motor Roblox.
