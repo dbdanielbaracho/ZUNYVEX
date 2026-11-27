@@ -288,3 +288,70 @@ for i=1,4 do
         elseif result=="advanced" then notice:FireClient(p,string.format("Memória: %d/4",attempt.nextIndex-1)) end
     end)
 end
+
+
+-- Cooperative portals: two distinct players, one shared arena, session rewards.
+local Coop = require(RS:WaitForChild("CoopPortals"))
+local coop = Coop.new()
+local cooldown: {[number]: number} = {}
+local generation = 0
+local pads: {Part} = {}
+local function resetVisuals()
+    for _, pad in pads do pad.Color = Color3.fromRGB(100,170,255) end
+end
+local function leaveCoop(p: Player)
+    if coop.player == p.UserId then
+        Coop.leave(coop,p.UserId)
+        generation += 1
+        resetVisuals()
+    end
+end
+local function bindCoop(p: Player)
+    p.CharacterRemoving:Connect(function() leaveCoop(p) end)
+end
+Players.PlayerAdded:Connect(bindCoop)
+for _, p in Players:GetPlayers() do bindCoop(p) end
+Players.PlayerRemoving:Connect(function(p)
+    leaveCoop(p)
+    cooldown[p.UserId] = nil
+end)
+for i=1,2 do
+    local pad = part("CoopPortalPad_"..i,Vector3.new(20+i*16,1,-48),Vector3.new(8,4,8),Color3.fromRGB(100,170,255),false)
+    pad.Material = Enum.Material.Neon
+    pad.Transparency = 0.25
+    pads[i] = pad
+    label(pad,"Dupla: portal "..i.." / 2")
+    pad.Touched:Connect(function(hit)
+        local p = playerFromHit(hit,pad)
+        if not p or not state[p] then return end
+        local now = os.clock()
+        if cooldown[p.UserId] and now-cooldown[p.UserId]<30 then return end
+        local result, partnerId = Coop.touch(coop,p.UserId,i,now)
+        if result=="waiting" then
+            generation += 1
+            local token = generation
+            resetVisuals()
+            pad.Color = Color3.fromRGB(255,220,80)
+            notice:FireClient(p,"Um amigo deve tocar o outro portal em 8 segundos!")
+            task.delay(8.1,function()
+                if generation==token and coop.player==p.UserId then
+                    Coop.clear(coop)
+                    resetVisuals()
+                    if state[p] then notice:FireClient(p,"Tempo esgotado. Tentem novamente!") end
+                end
+            end)
+        elseif result=="finished" and partnerId then
+            generation += 1
+            resetVisuals()
+            local partner = Players:GetPlayerByUserId(partnerId)
+            if not partner or not state[partner] then return end
+            cooldown[p.UserId]=now
+            cooldown[partnerId]=now
+            reward(p,20,0,"Portais unidos! +20 estrelas")
+            reward(partner,20,0,"Portais unidos! +20 estrelas")
+            for _, portalPad in pads do portalPad.Color=Color3.fromRGB(80,255,150) end
+            local token = generation
+            task.delay(2,function() if generation==token then resetVisuals() end end)
+        end
+    end)
+end
