@@ -296,8 +296,12 @@ local coop = Coop.new()
 local cooldown: {[number]: number} = {}
 local generation = 0
 local pads: {Part} = {}
+local portalLabels: {TextLabel} = {}
 local function resetVisuals()
-    for _, pad in pads do pad.Color = Color3.fromRGB(100,170,255) end
+    for i, pad in pads do
+        pad.Color = Color3.fromRGB(100,170,255)
+        portalLabels[i].Text = "Dupla: portal "..i.." / 2"
+    end
 end
 local function leaveCoop(p: Player)
     if coop.player == p.UserId then
@@ -321,6 +325,11 @@ for i=1,2 do
     pad.Transparency = 0.25
     pads[i] = pad
     label(pad,"Dupla: portal "..i.." / 2")
+    local gui = pad:FindFirstChildOfClass("BillboardGui")
+    assert(gui)
+    local textLabel = gui:FindFirstChildOfClass("TextLabel")
+    assert(textLabel)
+    portalLabels[i] = textLabel
     pad.Touched:Connect(function(hit)
         local p = playerFromHit(hit,pad)
         if not p or not state[p] then return end
@@ -332,7 +341,16 @@ for i=1,2 do
             local token = generation
             resetVisuals()
             pad.Color = Color3.fromRGB(255,220,80)
+            portalLabels[i].Text = "Ativado! Aguarde um amigo"
+            portalLabels[3-i].Text = "Toque aqui para ajudar! 8s"
             notice:FireClient(p,"Um amigo deve tocar o outro portal em 8 segundos!")
+            task.spawn(function()
+                for remaining = 7, 1, -1 do
+                    task.wait(1)
+                    if generation ~= token or coop.player ~= p.UserId then return end
+                    portalLabels[3-i].Text = "Toque aqui para ajudar! "..remaining.."s"
+                end
+            end)
             task.delay(8.1,function()
                 if generation==token and coop.player==p.UserId then
                     Coop.clear(coop)
@@ -349,7 +367,10 @@ for i=1,2 do
             cooldown[partnerId]=now
             reward(p,20,0,"Portais unidos! +20 estrelas")
             reward(partner,20,0,"Portais unidos! +20 estrelas")
-            for _, portalPad in pads do portalPad.Color=Color3.fromRGB(80,255,150) end
+            for index, portalPad in pads do
+                portalPad.Color=Color3.fromRGB(80,255,150)
+                portalLabels[index].Text = "Vitória em dupla! +20 estrelas"
+            end
             local token = generation
             task.delay(2,function() if generation==token then resetVisuals() end end)
         end

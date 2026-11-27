@@ -154,3 +154,7 @@ Módulo CoopPortals e testes CLI registrados na branch feature/coop-portals-v349
 
 ## v3.50 — Portais cooperativos validados e integrados (27/11/2026)
 PR #17 integrado à main no merge 3bcd5c8e306d0b1e3112e67780c1bf055f690438. Head validado 997600b5664a40cc697d50d5f3cd6fed84a4c05c; CI 45999645207, job 140507711723: 23 etapas aprovadas, incluindo compilação Luau, 12 suítes CLI (CoopPortals incluída), build Rojo e upload. Artefato 15198010909 (15205 bytes), digest sha256:be6ec91c8056c51ca241814281a456b238ccbaa414eb6cfc8b505fc11b618a0e. Homologação real pendente: dois jogadores, toque mobile, recompensa e cooldown no motor Roblox. Sem publicação ou DataStore. Próxima frente: melhorar feedback cooperativo e expandir aventuras. Estimativa comercial histórica de 30% permanece não auditada.
+
+
+## v3.51 — feedback cooperativo (27/11/2026; proposta em branch)
+Commit 8fc8054657a01b823b0c19c3de4a32e041f14710, leitura remota idêntica. Placas dos portais mostram pedido de ajuda, contagem regressiva e vitória; token de geração cancela atualizações antigas. CI, merge e homologação visual/multiplayer pendentes. Sem publicação ou DataStore. Próximo passo: validar CI e ampliar aventuras. Estimativa comercial histórica de 30% não auditada.
