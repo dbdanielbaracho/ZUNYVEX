@@ -40,6 +40,7 @@ local palette = button("Cor: Sky")
 local place = button("Colocar")
 local remove = button("Remover")
 local recolor = button("Pintar bloco")
+local sample = button("Copiar cor")
 local status = button("0 / "..config.MaxPieces)
 status.Active = false
 local selectGuest = button("Escolher colaborador")
@@ -93,6 +94,7 @@ local function refresh()
     place.Visible = active
     remove.Visible = active
     recolor.Visible = active
+    sample.Visible = active
     status.Visible = active
     selectGuest.Visible = active
     grant.Visible = active
@@ -116,6 +118,18 @@ local function submit(action: string)
     local hit = workspace:Raycast(ray.Origin,ray.Direction*config.MaxDistance,params)
     if not hit then return end
     local target = hit.Instance
+    if action == "sample" then
+        if not target:IsA("BasePart") or target.Name ~= "CreativeBlock" then return end
+        local paletteColors = {Color3.fromRGB(80,180,255), Color3.fromRGB(255,120,190), Color3.fromRGB(255,210,70), Color3.fromRGB(100,230,170)}
+        for i, value in ipairs(paletteColors) do
+            if (Vector3.new(target.Color.R,target.Color.G,target.Color.B)-Vector3.new(value.R,value.G,value.B)).Magnitude < 0.01 then
+                index = i
+                palette.Text = "Cor: "..colors[index]
+                break
+            end
+        end
+        return
+    end
     local position: Vector3
     if action == "remove" or action == "recolor" then
         if not target:IsA("BasePart") or target.Name ~= "CreativeBlock" then return end
@@ -131,6 +145,7 @@ palette.Activated:Connect(function() index = index % #colors + 1; palette.Text =
 place.Activated:Connect(function() submit("place") end)
 remove.Activated:Connect(function() submit("remove") end)
 recolor.Activated:Connect(function() submit("recolor") end)
+sample.Activated:Connect(function() submit("sample") end)
 UIS.InputBegan:Connect(function(input, processed)
     if processed or not active then return end
     if input.KeyCode == Enum.KeyCode.E then submit("place") end

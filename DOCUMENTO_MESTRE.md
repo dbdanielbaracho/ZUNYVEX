@@ -134,3 +134,7 @@ Interface e servidor de pintura registrados anteriormente (2eeeaf5b, 7d13a13f). 
 
 ## v3.44 — pintura de blocos integrada (26/11/2026)
 PR #14 integrado à main, merge 1c2184af63906d92532e33d90dc573a6d619bbe3. Head validado 17ee9e1934bcece6e3d2b6dac5b83f3c7ae3055c; CI 45898956091, job 140179737174: 21 etapas aprovadas, incluindo compilação Luau, dez suítes funcionais (regressões de autorização de pintura na suíte BuildLedger), build Rojo e upload. Artefato 15155415265 (14020 bytes). Homologação física, multiplayer e mobile pendentes; testes CLI não comprovam interação real. Sem publicação ou ativação do DataStore. Próxima frente: ampliar construção livre e minijogos cooperativos, revisar limites de estado por sessão. Estimativa comercial histórica de 30% não auditada.
+
+
+## v3.45 — conta-gotas de construção (26/11/2026; proposta em branch)
+Botão Copiar cor permite selecionar a cor de um bloco existente pela mira, sem modificar o bloco ou enviar pedido ao servidor. Interface por Activated para mouse e toque. Commit 4d0d233be0fc28b4d23320041ee036e48d50dbd7. Compilação, CI, merge e homologação real pendentes. Sem publicação ou DataStore. Estimativa comercial histórica de 30% não auditada.
