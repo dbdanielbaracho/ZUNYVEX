@@ -20,7 +20,11 @@ local result = remote("BuildResult")
 local share = remote("BuildShareRequest")
 local shareResult = remote("BuildShareResult")
 local builds = folder(workspace, "ZunyvexBuilds")
-local colors = {Sky = Color3.fromRGB(80,180,255), Pink = Color3.fromRGB(255,120,190), Gold = Color3.fromRGB(255,210,70), Mint = Color3.fromRGB(100,230,170)}
+local BuildPalette = require(RS:WaitForChild("BuildPalette"))
+local colors = {}
+for _, entry in ipairs(BuildPalette.entries) do
+    colors[entry.name] = Color3.fromRGB(entry.r, entry.g, entry.b)
+end
 local occupied: {[string]: Part} = {}
 local ledger = require(script.Parent:WaitForChild("BuildLedger")).new(Config.MaxPieces)
 local last: {[Player]: number} = {}

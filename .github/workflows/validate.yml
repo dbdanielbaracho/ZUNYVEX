@@ -69,6 +69,9 @@ jobs:
       - name: Execute memory challenge tests
         run: |
           "$RUNNER_TEMP/luau-build/luau" tests/MemoryMatch.spec.luau
+      - name: Execute shared palette tests
+        run: |
+          "$RUNNER_TEMP/luau-build/luau" tests/BuildPalette.spec.luau
       - name: Install Rojo
         run: cargo install rojo --version 7.4.4 --locked
       - name: Build private place artifact

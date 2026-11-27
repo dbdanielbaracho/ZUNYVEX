@@ -142,3 +142,6 @@ Botão Copiar cor permite selecionar a cor de um bloco existente pela mira, sem 
 
 ## v3.46 — conta-gotas integrado (26/11/2026)
 PR #15 integrado à main, merge 1f8c1d88602fc22df2beec4a877679adc775e2b8. Head validado b38672de1cf1b4ec6ae767e546b8ba2b91348b6f; CI 45912027281, job 140222406098: 21 etapas aprovadas, incluindo compilação Luau, dez suítes funcionais de regressão, build Rojo e upload. Artefato 15160916894 (14175 bytes). Não há teste funcional específico do conta-gotas nem homologação real de mouse/toque; adicionar cobertura e validar layout. Sem publicação ou ativação de DataStore nesta rodada. Próxima frente: testes de paleta compartilhada e novos minijogos cooperativos. Estimativa comercial histórica de 30% não auditada.
+
+## v3.47 — paleta compartilhada e testes (27/11/2026; proposta em branch)
+Módulo BuildPalette centraliza cores e reconhecimento do conta-gotas; cliente e servidor integrados. Testes CLI de quatro cores, tolerância, imutabilidade e entradas inválidas (6a17c2a7); gate obrigatório no CI (1d6850f2). Execução dos testes, build, merge e homologação real pendentes. Sem publicação ou DataStore. Estimativa comercial histórica de 30% não auditada. Próximo passo: validar CI e integrar após sucesso.

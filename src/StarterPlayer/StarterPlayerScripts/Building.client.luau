@@ -85,7 +85,9 @@ Players.PlayerRemoving:Connect(function(guest)
     end
 end)
 local active = false
-local colors = {"Sky","Pink","Gold","Mint"}
+local BuildPalette = require(RS:WaitForChild("BuildPalette"))
+local colors = {}
+for i, entry in ipairs(BuildPalette.entries) do colors[i] = entry.name end
 local index = 1
 local last = -math.huge
 local function refresh()
@@ -120,13 +122,10 @@ local function submit(action: string)
     local target = hit.Instance
     if action == "sample" then
         if not target:IsA("BasePart") or target.Name ~= "CreativeBlock" then return end
-        local paletteColors = {Color3.fromRGB(80,180,255), Color3.fromRGB(255,120,190), Color3.fromRGB(255,210,70), Color3.fromRGB(100,230,170)}
-        for i, value in ipairs(paletteColors) do
-            if (Vector3.new(target.Color.R,target.Color.G,target.Color.B)-Vector3.new(value.R,value.G,value.B)).Magnitude < 0.01 then
-                index = i
-                palette.Text = "Cor: "..colors[index]
-                break
-            end
+        local matched = BuildPalette.match(target.Color.R, target.Color.G, target.Color.B)
+        if matched then
+            index = matched
+            palette.Text = "Cor: "..colors[index]
         end
         return
     end
