@@ -158,3 +158,7 @@ PR #17 integrado à main no merge 3bcd5c8e306d0b1e3112e67780c1bf055f690438. Head
 
 ## v3.51 — feedback cooperativo (27/11/2026; proposta em branch)
 Commit 8fc8054657a01b823b0c19c3de4a32e041f14710, leitura remota idêntica. Placas dos portais mostram pedido de ajuda, contagem regressiva e vitória; token de geração cancela atualizações antigas. CI, merge e homologação visual/multiplayer pendentes. Sem publicação ou DataStore. Próximo passo: validar CI e ampliar aventuras. Estimativa comercial histórica de 30% não auditada.
+
+
+## v3.52 — feedback cooperativo integrado (27/11/2026)
+PR #18 integrado à main no merge 59e2f0094b6bd00ab278daec42f65a9c3f0aedf1. Head validado 5cff7b17175b5e8d489b6abd1c8c53620daeffa7; CI 46018026559, job 140570087541: 23 etapas aprovadas, incluindo compilação Luau, 12 suítes CLI de regressão, build Rojo e upload. Artefato 15206756860 (15409 bytes), digest sha256:958f950d4cb3acc54e8926b1fc0d2733a392208a8357134ac2c6d87338753cea. Não há teste específico de renderização ou temporização das placas no motor; homologação visual, multiplayer e mobile pendente. Sem publicação ou ativação do DataStore nesta rodada. Próxima frente: expandir aventuras e cobertura de testes do feedback. Estimativa comercial histórica de 30% não auditada.
