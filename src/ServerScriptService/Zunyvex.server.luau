@@ -395,3 +395,20 @@ moonBeacon.Touched:Connect(function(hit)
     if not DiscoveryLedger.claim(discovered,p.UserId,"moon") then return end
     reward(p,25,0,"Ilha da Lua descoberta!")
 end)
+
+-- Optional lunar observatory: a short ascending jumping route with a unique discovery.
+for i=1,5 do
+    local step = part("MoonObservatoryStep_"..i, Vector3.new(-145-(i-1)*7, -0.5+i*2, 18), Vector3.new(6,2,7), Color3.fromRGB(145,165,225), true)
+    if i==1 then label(step,"Observatório lunar: suba!") end
+end
+local observatory = part("MoonObservatory", Vector3.new(-180,11.5,18), Vector3.new(8,2,8), Color3.fromRGB(110,135,210), true)
+local star = part("MoonObservatoryStar", Vector3.new(-180,15,18), Vector3.new(3,3,3), Color3.fromRGB(255,230,120), false)
+star.Material = Enum.Material.Neon
+star.Shape = Enum.PartType.Ball
+label(star,"Estrela do observatório")
+star.Touched:Connect(function(hit)
+    local p = playerFromHit(hit,star)
+    if not p or not state[p] then return end
+    if not DiscoveryLedger.claim(discovered,p.UserId,"moon-observatory") then return end
+    reward(p,30,0,"Observatório lunar descoberto! +30 estrelas")
+end)
