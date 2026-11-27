@@ -376,3 +376,22 @@ for i=1,2 do
         end
     end)
 end
+
+-- Moon island: optional exploration route, no teleport or purchase required.
+-- Main island ends at x=-108; bridge joins the new island at x=-138.
+part("MoonBridge", Vector3.new(-123,-3,0), Vector3.new(30,2,12), Color3.fromRGB(135,155,220), true)
+part("MoonIsland", Vector3.new(-160,-3,0), Vector3.new(44,2,48), Color3.fromRGB(85,105,165), true)
+for i=1,5 do
+    local rock=part("MoonRock_"..i,Vector3.new(-146-(i-1)*7,0,-15),Vector3.new(5,4,5),Color3.fromRGB(170,185,230),true)
+    rock.Shape=Enum.PartType.Ball
+end
+local moonBeacon=part("MoonDiscovery",Vector3.new(-175,2,10),Vector3.new(6,6,6),Color3.fromRGB(185,220,255),false)
+moonBeacon.Shape=Enum.PartType.Ball
+moonBeacon.Material=Enum.Material.Neon
+label(moonBeacon,"Ilha da Lua: descubra!")
+moonBeacon.Touched:Connect(function(hit)
+    local p=playerFromHit(hit,moonBeacon)
+    if not p or not state[p] then return end
+    if not DiscoveryLedger.claim(discovered,p.UserId,"moon") then return end
+    reward(p,25,0,"Ilha da Lua descoberta!")
+end)
