@@ -145,3 +145,6 @@ PR #15 integrado à main, merge 1f8c1d88602fc22df2beec4a877679adc775e2b8. Head v
 
 ## v3.47 — paleta compartilhada e testes (27/11/2026; proposta em branch)
 Módulo BuildPalette centraliza cores e reconhecimento do conta-gotas; cliente e servidor integrados. Testes CLI de quatro cores, tolerância, imutabilidade e entradas inválidas (6a17c2a7); gate obrigatório no CI (1d6850f2). Execução dos testes, build, merge e homologação real pendentes. Sem publicação ou DataStore. Estimativa comercial histórica de 30% não auditada. Próximo passo: validar CI e integrar após sucesso.
+
+## v3.48 — paleta compartilhada integrada (27/11/2026)
+PR #16 integrado à main no merge 7eecdfe6d372b6acd64c9a6a4faa145163671a2a. Head validado 2fc071554a7406e3d457dba0896726db107aa1f0; CI 45946439229, job 140332102522: 22 etapas aprovadas, incluindo compilação Luau, 11 suítes funcionais CLI (incluindo BuildPalette), build Rojo e upload. Artefato 15174009623 (14335 bytes). Homologação real de mouse/toque, multiplayer e mobile permanece pendente; testes CLI não substituem execução no motor Roblox. Sem publicação ou ativação de DataStore nesta rodada. Próxima frente: minijogos cooperativos e aventuras, preservando construção livre. Estimativa comercial histórica de 30% não auditada.
