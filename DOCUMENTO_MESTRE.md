@@ -166,3 +166,7 @@ PR #18 integrado à main no merge 59e2f0094b6bd00ab278daec42f65a9c3f0aedf1. Head
 
 ## v3.53 — Ilha da Lua (27/11/2026; proposta em branch)
 Nova região acessível por ponte, cinco rochas decorativas e cristal de descoberta com recompensa de 25 estrelas, usando DiscoveryLedger e proteção de contato existente (ca9e09d2605293421770e8eb14950b0710267072). Seis assertions adicionais cobrem descoberta lunar, duplicidade, isolamento entre jogadores e sessão nova (5a9e01361bf68e3d0c40a17d5b606f129fd9c354); leitura remota conferida. CI, build, merge e homologação física pendentes. Sem publicação ou DataStore. Estimativa comercial histórica de 30% não auditada.
+
+
+## v3.54 — Ilha da Lua integrada (27/11/2026)
+PR #19 integrado à main no merge eb94c58f7cebecc2f619e711500c30ee7e077ae8. Head validado 5bd936024a6ccc0995ca017193794f2d2e818324; CI 46043550819, job 140657041985: 23 etapas aprovadas, incluindo compilação Luau, 12 suítes CLI (seis novas assertions de descoberta), build Rojo e upload. Artefato 15220818451 (15664 bytes), digest sha256:2398f17f6a38a529a36a54484ccd2e3ea3cfbaa2eee002633128d29717e56d20. Homologação física da ponte, contatos, recompensas e multiplayer permanece pendente. Sem publicação ou DataStore. Próxima frente: ampliar aventuras e cobertura de integração. Estimativa comercial histórica de 30% não auditada.
