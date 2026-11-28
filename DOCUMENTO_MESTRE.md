@@ -204,3 +204,7 @@ Destaque local de bloco criativo sob a mira, contorno amarelo sem preenchimento,
 
 ## v3.64 — destaque de alvo integrado (28/11/2026)
 PR #24 integrado à main no merge 9980551850ded685bd738af1502e979c912fcdaf. Head validado c0c9bc479b90ea26305e6470eb0caab1dc957fdc; CI 46126454720, job 140922010372: 23 etapas aprovadas, incluindo compilação Luau, 12 suítes CLI de regressão, build Rojo e upload. Artefato 15255279445 (16689 bytes), digest sha256:c4b84f8b9f6df0501be145f990b88013e86b6a27e430d05f4a5f8c137fc704aa. Sem teste visual específico no motor; homologar seleção, oclusão e desempenho mobile. Sem publicação ou ativação de DataStore nesta execução. Próxima frente: ampliar ferramentas criativas e minijogos em paralelo à homologação. Estimativa comercial histórica de 30% não auditada.
+
+
+## v3.65 — prévia de colocação (28/11/2026; proposta em branch)
+Prévia local translúcida da posição de colocação, usando a mesma função de encaixe da ação real; sem colisão, toque ou participação no raycast. Oculta sem alvo ou fora do modo Criar. Não representa autorização do servidor. Commit 505f5eee921527670f4ba659bc05cc333f7c4315; leitura remota idêntica. CI, build, merge e homologação visual pendentes. Validar encaixe, oclusão, desempenho e rejeições do servidor. Sem publicação ou DataStore. Estimativa comercial histórica de 30% não auditada.
