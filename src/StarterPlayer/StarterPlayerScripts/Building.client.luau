@@ -162,17 +162,39 @@ highlight.FillTransparency = 1
 highlight.OutlineColor = Color3.fromRGB(255, 220, 90)
 highlight.Enabled = false
 highlight.Parent = workspace
+-- Local-only placement preview; never participates in physics or raycasts.
+local ghost = Instance.new("Part")
+ghost.Name = "CreativePlacementPreview"
+ghost.Size = Vector3.new(config.Grid, config.Grid, config.Grid)
+ghost.Anchored = true
+ghost.CanCollide = false
+ghost.CanTouch = false
+ghost.CanQuery = false
+ghost.CastShadow = false
+ghost.Material = Enum.Material.ForceField
+ghost.Transparency = 1
+ghost.Parent = workspace
+local function placementPosition(hit: RaycastResult): Vector3
+    return snap(hit.Position + hit.Normal*(config.Grid/2))
+end
 local elapsed = 0
 RunService.RenderStepped:Connect(function(dt)
     if not active then
         highlight.Enabled = false
         highlight.Adornee = nil
+        ghost.Transparency = 1
         return
     end
     elapsed += dt
     if elapsed < 0.1 then return end
     elapsed = 0
     local hit = aim()
+    if hit then
+        ghost.Position = placementPosition(hit)
+        ghost.Transparency = 0.55
+    else
+        ghost.Transparency = 1
+    end
     local target = if hit then hit.Instance else nil
     if target and target:IsA("BasePart") and target.Name == "CreativeBlock" then
         highlight.Adornee = target
@@ -201,7 +223,7 @@ local function submit(action: string)
         if not target:IsA("BasePart") or target.Name ~= "CreativeBlock" then return end
         position = target.Position
     else
-        position = snap(hit.Position + hit.Normal*(config.Grid/2))
+        position = placementPosition(hit)
     end
     last = os.clock()
     request:FireServer(action,position,colors[index])
