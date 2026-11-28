@@ -194,3 +194,7 @@ PR #22 integrado à main no merge 6fadaf33dbe402cae3a91600d84bb63168286a20. Head
 
 ## v3.61 — áreas seguras da construção (28/11/2026; proposta em branch)
 Separados os ScreenGui da mira e dos controles: painel usa CoreUISafeInsets; mira usa viewport integral sem recorte de área segura, mantendo o raio central existente. Commit ebae1d4c0e0777bd6707078a15c65668205da183; leitura remota idêntica. CI, merge e homologação visual pendentes. Validar orientação retrato/paisagem, recortes de tela, barra superior, alinhamento da mira e toque; sem publicação ou DataStore. Estimativa comercial histórica de 30% não auditada.
+
+
+## v3.62 — áreas seguras integradas (28/11/2026)
+PR #23 integrado à main no merge 58cb3209f9e614ad7a455c4188be4ecb385a0d57. Head validado 89612790d53ed7d4ca3e67a875b19d0b258839a5; CI 46117673272, job 140895026772: 23 etapas aprovadas, incluindo compilação Luau, 12 suítes CLI de regressão, build Rojo e upload. Artefato 15252263795 (16445 bytes), digest sha256:a632aa43e33272eb481ccc632e3e790c1dd683373970714c4cd8291eee09314d. Sem teste visual específico no motor; homologar retrato/paisagem, recortes, alinhamento e toque. Sem publicação ou DataStore nesta execução. Próxima frente: ampliar ferramentas criativas e minijogos, em paralelo à homologação. Estimativa comercial histórica de 30% não auditada.
