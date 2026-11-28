@@ -412,3 +412,25 @@ star.Touched:Connect(function(hit)
     if not DiscoveryLedger.claim(discovered,p.UserId,"moon-observatory") then return end
     reward(p,30,0,"Observatório lunar descoberto! +30 estrelas")
 end)
+
+
+-- A safe descent from the observatory: explicit interaction, no forced teleport.
+local returnPrompt = Instance.new("ProximityPrompt")
+returnPrompt.ActionText = "Voltar à ilha"
+returnPrompt.ObjectText = "Observatório lunar"
+returnPrompt.KeyboardKeyCode = Enum.KeyCode.E
+returnPrompt.MaxActivationDistance = 10
+returnPrompt.RequiresLineOfSight = true
+returnPrompt.HoldDuration = 0.5
+returnPrompt.Parent = observatory
+returnPrompt.Triggered:Connect(function(p)
+    if not state[p] then return end
+    local character = p.Character
+    if not character then return end
+    local root = character:FindFirstChild("HumanoidRootPart")
+    local humanoid = character:FindFirstChildOfClass("Humanoid")
+    if not root or not root:IsA("BasePart") or not humanoid or humanoid.Health <= 0 then return end
+    if not ContactGuard.near((root.Position - observatory.Position).Magnitude, 12) then return end
+    character:PivotTo(CFrame.new(-160,5,0))
+    notice:FireClient(p,"De volta à Ilha da Lua!")
+end)
