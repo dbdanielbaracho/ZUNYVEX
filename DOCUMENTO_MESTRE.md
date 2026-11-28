@@ -184,3 +184,7 @@ Adicionado ProximityPrompt para retorno voluntário à Ilha da Lua, com interaç
 
 ## v3.58 — retorno lunar integrado (27/11/2026)
 PR #21 integrado à main no merge dd439e3da5f5ac7cf050145cb118562a7857d6fd. Head validado 998be08403d3ea4781a092c3febdb9329fc76565; CI 46088471991, job 140803521491: 23 etapas aprovadas, incluindo compilação Luau, 12 suítes CLI de regressão, build Rojo e upload. Artefato 15240317294 (16158 bytes), digest sha256:b6dbb8f8ad1e09c07e0213f94ce5ec058dd0baf08d66f7070275350ad5470c73. Não há teste específico do ProximityPrompt no motor; homologar toque, teclado, distância e destino. Sem publicação ou ativação de DataStore nesta execução. Próxima frente: construção livre e testes de integração. Estimativa comercial histórica de 30% não auditada.
+
+
+## v3.59 — mira de construção (28/11/2026; proposta em branch)
+Mira central visível somente no modo Criar, alinhada ao raio de seleção da câmera, com contraste e sem capturar interação. Commit bc0fbf3568ce46cedbf04ae802de9388799b48c4, leitura remota idêntica. Validar compilação e regressão no CI; homologar alinhamento, áreas seguras e layout em celular e desktop no motor Roblox. Sem publicação ou DataStore. Estimativa comercial histórica de 30% não auditada.
