@@ -14,6 +14,33 @@ local gui = Instance.new("ScreenGui")
 gui.Name = "ZUNYVEX_Build"
 gui.ResetOnSpawn = false
 gui.Parent = player:WaitForChild("PlayerGui")
+-- Match the viewport-space ray used by submit, including on mobile.
+gui.IgnoreGuiInset = true
+local reticle = Instance.new("Frame")
+reticle.Name = "BuildReticle"
+reticle.AnchorPoint = Vector2.new(0.5, 0.5)
+reticle.Position = UDim2.fromScale(0.5, 0.5)
+reticle.Size = UDim2.fromOffset(18, 18)
+reticle.BackgroundTransparency = 1
+reticle.Active = false
+reticle.Visible = false
+reticle.Parent = gui
+local function reticleBar(size: UDim2)
+    local bar = Instance.new("Frame")
+    bar.AnchorPoint = Vector2.new(0.5, 0.5)
+    bar.Position = UDim2.fromScale(0.5, 0.5)
+    bar.Size = size
+    bar.BackgroundColor3 = Color3.new(1, 1, 1)
+    bar.BorderSizePixel = 0
+    bar.Active = false
+    bar.Parent = reticle
+    local outline = Instance.new("UIStroke")
+    outline.Color = Color3.new(0, 0, 0)
+    outline.Thickness = 1
+    outline.Parent = bar
+end
+reticleBar(UDim2.fromOffset(18, 2))
+reticleBar(UDim2.fromOffset(2, 18))
 local panel = Instance.new("ScrollingFrame")
 panel.AutomaticCanvasSize = Enum.AutomaticSize.Y
 panel.CanvasSize = UDim2.fromOffset(0, 0)
@@ -91,6 +118,7 @@ for i, entry in ipairs(BuildPalette.entries) do colors[i] = entry.name end
 local index = 1
 local last = -math.huge
 local function refresh()
+    reticle.Visible = active
     toggle.Text = if active then "Fechar criação" else "Criar"
     palette.Visible = active
     place.Visible = active
