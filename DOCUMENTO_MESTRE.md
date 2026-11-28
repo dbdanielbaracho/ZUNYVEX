@@ -188,3 +188,6 @@ PR #21 integrado à main no merge dd439e3da5f5ac7cf050145cb118562a7857d6fd. Head
 
 ## v3.59 — mira de construção (28/11/2026; proposta em branch)
 Mira central visível somente no modo Criar, alinhada ao raio de seleção da câmera, com contraste e sem capturar interação. Commit bc0fbf3568ce46cedbf04ae802de9388799b48c4, leitura remota idêntica. Validar compilação e regressão no CI; homologar alinhamento, áreas seguras e layout em celular e desktop no motor Roblox. Sem publicação ou DataStore. Estimativa comercial histórica de 30% não auditada.
+
+## v3.60 — mira de construção integrada (28/11/2026)
+PR #22 integrado à main no merge 6fadaf33dbe402cae3a91600d84bb63168286a20. Head validado e3a760e2f3ee363bbfed80d5c0e6cd4e0a193805; CI 46104024266, job 140852619310: 23 etapas aprovadas, incluindo compilação Luau, 12 suítes CLI de regressão, build Rojo e upload. Artefato 15246648473 (16375 bytes), digest sha256:ab653f50725eb70b15af2be83bb518c1d3644e1c875720711a4ed7897ebd7cb8. Sem teste visual específico da mira no motor; homologar alinhamento, áreas seguras e controles mobile/desktop. Sem publicação ou ativação de DataStore nesta execução. Próxima frente: separar a mira da interface de controles para preservar áreas seguras, se necessário, e ampliar ferramentas criativas. Estimativa comercial histórica de 30% não auditada.
