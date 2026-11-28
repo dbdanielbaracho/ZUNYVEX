@@ -198,3 +198,6 @@ Separados os ScreenGui da mira e dos controles: painel usa CoreUISafeInsets; mir
 
 ## v3.62 — áreas seguras integradas (28/11/2026)
 PR #23 integrado à main no merge 58cb3209f9e614ad7a455c4188be4ecb385a0d57. Head validado 89612790d53ed7d4ca3e67a875b19d0b258839a5; CI 46117673272, job 140895026772: 23 etapas aprovadas, incluindo compilação Luau, 12 suítes CLI de regressão, build Rojo e upload. Artefato 15252263795 (16445 bytes), digest sha256:a632aa43e33272eb481ccc632e3e790c1dd683373970714c4cd8291eee09314d. Sem teste visual específico no motor; homologar retrato/paisagem, recortes, alinhamento e toque. Sem publicação ou DataStore nesta execução. Próxima frente: ampliar ferramentas criativas e minijogos, em paralelo à homologação. Estimativa comercial histórica de 30% não auditada.
+
+## v3.63 — destaque de alvo de construção (28/11/2026; proposta em branch)
+Destaque local de bloco criativo sob a mira, contorno amarelo sem preenchimento, oclusão respeitada, atualização limitada a 10 Hz e limpeza ao sair do modo Criar. Raycast compartilhado entre prévia e ações; servidor continua autoritativo. Commit 49a98314380997f3e67ef8c3365c75bddf499e4b; leitura remota idêntica. CI, build, merge e homologação visual pendentes; verificar seleção, oclusão e desempenho mobile. Sem publicação ou DataStore. Estimativa comercial histórica de 30% não auditada.
