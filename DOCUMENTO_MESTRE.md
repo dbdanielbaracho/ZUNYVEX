@@ -201,3 +201,6 @@ PR #23 integrado à main no merge 58cb3209f9e614ad7a455c4188be4ecb385a0d57. Head
 
 ## v3.63 — destaque de alvo de construção (28/11/2026; proposta em branch)
 Destaque local de bloco criativo sob a mira, contorno amarelo sem preenchimento, oclusão respeitada, atualização limitada a 10 Hz e limpeza ao sair do modo Criar. Raycast compartilhado entre prévia e ações; servidor continua autoritativo. Commit 49a98314380997f3e67ef8c3365c75bddf499e4b; leitura remota idêntica. CI, build, merge e homologação visual pendentes; verificar seleção, oclusão e desempenho mobile. Sem publicação ou DataStore. Estimativa comercial histórica de 30% não auditada.
+
+## v3.64 — destaque de alvo integrado (28/11/2026)
+PR #24 integrado à main no merge 9980551850ded685bd738af1502e979c912fcdaf. Head validado c0c9bc479b90ea26305e6470eb0caab1dc957fdc; CI 46126454720, job 140922010372: 23 etapas aprovadas, incluindo compilação Luau, 12 suítes CLI de regressão, build Rojo e upload. Artefato 15255279445 (16689 bytes), digest sha256:c4b84f8b9f6df0501be145f990b88013e86b6a27e430d05f4a5f8c137fc704aa. Sem teste visual específico no motor; homologar seleção, oclusão e desempenho mobile. Sem publicação ou ativação de DataStore nesta execução. Próxima frente: ampliar ferramentas criativas e minijogos em paralelo à homologação. Estimativa comercial histórica de 30% não auditada.
