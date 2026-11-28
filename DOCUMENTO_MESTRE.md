@@ -181,3 +181,6 @@ PR #20 integrado à main no merge f451d32b409f304b4fd7aadf50963cd7c092eaa8. Head
 
 ## v3.57 — retorno opcional do Observatório Lunar (27/11/2026; proposta em branch)
 Adicionado ProximityPrompt para retorno voluntário à Ilha da Lua, com interação por teclado/toque, validação de personagem vivo e distância no servidor (890f7ce803e0e20fbe6508e12a4409e688025e44; leitura remota idêntica). Sem recompensa adicional. Validar compilação e regressão no CI; homologar acionamento mobile, rejeição remota e destino livre no motor Roblox. Sem publicação ou DataStore. Estimativa comercial histórica de 30% não auditada.
+
+## v3.58 — retorno lunar integrado (27/11/2026)
+PR #21 integrado à main no merge dd439e3da5f5ac7cf050145cb118562a7857d6fd. Head validado 998be08403d3ea4781a092c3febdb9329fc76565; CI 46088471991, job 140803521491: 23 etapas aprovadas, incluindo compilação Luau, 12 suítes CLI de regressão, build Rojo e upload. Artefato 15240317294 (16158 bytes), digest sha256:b6dbb8f8ad1e09c07e0213f94ce5ec058dd0baf08d66f7070275350ad5470c73. Não há teste específico do ProximityPrompt no motor; homologar toque, teclado, distância e destino. Sem publicação ou ativação de DataStore nesta execução. Próxima frente: construção livre e testes de integração. Estimativa comercial histórica de 30% não auditada.
