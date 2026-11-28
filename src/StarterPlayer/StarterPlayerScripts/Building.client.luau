@@ -14,8 +14,15 @@ local gui = Instance.new("ScreenGui")
 gui.Name = "ZUNYVEX_Build"
 gui.ResetOnSpawn = false
 gui.Parent = player:WaitForChild("PlayerGui")
--- Match the viewport-space ray used by submit, including on mobile.
-gui.IgnoreGuiInset = true
+-- Keep controls inside the Roblox safe area; only the reticle uses viewport space.
+gui.ScreenInsets = Enum.ScreenInsets.CoreUISafeInsets
+local reticleGui = Instance.new("ScreenGui")
+reticleGui.Name = "ZUNYVEX_BuildReticle"
+reticleGui.ResetOnSpawn = false
+reticleGui.IgnoreGuiInset = true
+reticleGui.ScreenInsets = Enum.ScreenInsets.None
+reticleGui.ClipToDeviceSafeArea = false
+reticleGui.Parent = gui.Parent
 local reticle = Instance.new("Frame")
 reticle.Name = "BuildReticle"
 reticle.AnchorPoint = Vector2.new(0.5, 0.5)
@@ -24,7 +31,7 @@ reticle.Size = UDim2.fromOffset(18, 18)
 reticle.BackgroundTransparency = 1
 reticle.Active = false
 reticle.Visible = false
-reticle.Parent = gui
+reticle.Parent = reticleGui
 local function reticleBar(size: UDim2)
     local bar = Instance.new("Frame")
     bar.AnchorPoint = Vector2.new(0.5, 0.5)
