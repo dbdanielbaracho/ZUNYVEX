@@ -177,3 +177,7 @@ Aventura opcional com cinco plataformas ascendentes e estrela de descoberta de 3
 
 ## v3.56 — Observatório Lunar integrado (27/11/2026)
 PR #20 integrado à main no merge f451d32b409f304b4fd7aadf50963cd7c092eaa8. Head validado 54538c33b9f63061a178ef40c91120d39e136525; CI 46078177655, job 140770726669: 23 etapas aprovadas, incluindo compilação Luau, 12 suítes CLI (DiscoveryLedger ampliado), build Rojo e upload. Artefato 15235583694 (15908 bytes), digest sha256:1dbe512f198082167e15d12abc6cabee702c2abf02b856d5dccd7222496ad37a. Homologação física dos saltos, recompensa e multiplayer pendente; sem publicação ou ativação de DataStore nesta execução. Próxima frente: ampliar construção livre e cobertura de integração, em paralelo à homologação. Estimativa comercial histórica de 30% não auditada.
+
+
+## v3.57 — retorno opcional do Observatório Lunar (27/11/2026; proposta em branch)
+Adicionado ProximityPrompt para retorno voluntário à Ilha da Lua, com interação por teclado/toque, validação de personagem vivo e distância no servidor (890f7ce803e0e20fbe6508e12a4409e688025e44; leitura remota idêntica). Sem recompensa adicional. Validar compilação e regressão no CI; homologar acionamento mobile, rejeição remota e destino livre no motor Roblox. Sem publicação ou DataStore. Estimativa comercial histórica de 30% não auditada.
