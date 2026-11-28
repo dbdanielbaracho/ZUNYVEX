@@ -171,7 +171,7 @@ ghost.CanCollide = false
 ghost.CanTouch = false
 ghost.CanQuery = false
 ghost.CastShadow = false
-ghost.Material = Enum.Material.ForceField
+ghost.Material = Enum.Material.SmoothPlastic
 ghost.Transparency = 1
 ghost.Parent = workspace
 local function placementPosition(hit: RaycastResult): Vector3
@@ -191,6 +191,8 @@ RunService.RenderStepped:Connect(function(dt)
     local hit = aim()
     if hit then
         ghost.Position = placementPosition(hit)
+        local selected = BuildPalette.entries[index]
+        ghost.Color = Color3.fromRGB(selected.r, selected.g, selected.b)
         ghost.Transparency = 0.55
     else
         ghost.Transparency = 1
