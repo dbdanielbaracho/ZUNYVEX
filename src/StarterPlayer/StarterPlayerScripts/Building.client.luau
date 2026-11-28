@@ -3,6 +3,7 @@
 local Players = game:GetService("Players")
 local RS = game:GetService("ReplicatedStorage")
 local UIS = game:GetService("UserInputService")
+local RunService = game:GetService("RunService")
 local player = Players.LocalPlayer
 local config = require(RS:WaitForChild("GameConfig")).Build
 local remotes = RS:WaitForChild("ZunyvexRemotes")
@@ -143,16 +144,47 @@ local function snap(p: Vector3): Vector3
     local g = config.Grid
     return Vector3.new(math.round(p.X/g)*g,math.round(p.Y/g)*g,math.round(p.Z/g)*g)
 end
-local function submit(action: string)
-    if not active or os.clock()-last < config.MinInterval then return end
+local function aim(): RaycastResult?
+    if not active then return nil end
     local camera = workspace.CurrentCamera
-    if not camera then return end
+    if not camera then return nil end
     local center = camera.ViewportSize/2
     local ray = camera:ViewportPointToRay(center.X,center.Y)
     local params = RaycastParams.new()
     params.FilterType = Enum.RaycastFilterType.Exclude
     params.FilterDescendantsInstances = if player.Character then {player.Character} else {}
-    local hit = workspace:Raycast(ray.Origin,ray.Direction*config.MaxDistance,params)
+    return workspace:Raycast(ray.Origin,ray.Direction*config.MaxDistance,params)
+end
+local highlight = Instance.new("Highlight")
+highlight.Name = "CreativeTargetPreview"
+highlight.DepthMode = Enum.HighlightDepthMode.Occluded
+highlight.FillTransparency = 1
+highlight.OutlineColor = Color3.fromRGB(255, 220, 90)
+highlight.Enabled = false
+highlight.Parent = workspace
+local elapsed = 0
+RunService.RenderStepped:Connect(function(dt)
+    if not active then
+        highlight.Enabled = false
+        highlight.Adornee = nil
+        return
+    end
+    elapsed += dt
+    if elapsed < 0.1 then return end
+    elapsed = 0
+    local hit = aim()
+    local target = if hit then hit.Instance else nil
+    if target and target:IsA("BasePart") and target.Name == "CreativeBlock" then
+        highlight.Adornee = target
+        highlight.Enabled = true
+    else
+        highlight.Enabled = false
+        highlight.Adornee = nil
+    end
+end)
+local function submit(action: string)
+    if not active or os.clock()-last < config.MinInterval then return end
+    local hit = aim()
     if not hit then return end
     local target = hit.Instance
     if action == "sample" then
